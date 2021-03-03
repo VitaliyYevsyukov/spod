@@ -1557,7 +1557,48 @@ public class RoadPromtactuPresenter {
 		
 		
 		// save data to previous interphase
-		if (previousInterphaseTransitionsHBoxCell != null) {
+		specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(previousInterphaseTransitionsHBoxCell);
+		String selectedDirectionNumber;
+		if(listViewPhaseDirections.getItems().size() != 0){
+			if(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue() != null){
+				selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue();
+
+				String fromPhase = previousInterphaseTransitionsHBoxCell.getComboBoxFromPhase().getValue();
+				List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(fromPhase);
+				List<String> openDirectionsFrom = new ArrayList<>();
+
+				if(openDirectionsFromPhase != null) {	// was edit
+					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
+						openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
+					}
+				}
+
+				promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+				if(openDirectionsFrom.contains(selectedDirectionNumber)){
+					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+				}else{
+					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+				}
+
+
+			}else{
+				selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue();
+				promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+
+				promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+				promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+				promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+				promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+				promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+			}
+		}
+
+
+
+		/*if (previousInterphaseTransitionsHBoxCell != null) {
 			specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(previousInterphaseTransitionsHBoxCell);
 			if (listViewPhaseDirections.getItems().size() != 0) {
 
@@ -1621,7 +1662,7 @@ public class RoadPromtactuPresenter {
 				}
 				
 				
-				/*if (previousDirection != null) {
+				if (previousDirection != null) {
 					List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
 					List<String> fromPhaseList1 = new ArrayList<String>();
 					
@@ -1654,12 +1695,12 @@ public class RoadPromtactuPresenter {
 						}
 					
 					}
-				}*/
+				}
 				
 				
 				
 			}
-		}
+		}*/
 		//////////////////////////////////////////////////////////////////////////////////////
 
 		listViewPhaseDirections.getItems().clear();
@@ -2408,25 +2449,6 @@ public class RoadPromtactuPresenter {
 				labelInterPhaseFrom.setText("");
 				labelInterPhaseTo.setText("");
 			}
-		});
-		
-		
-		listViewInterphase.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			
-			if(oldValue != null) {
-				specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(oldValue);
-				
-				promtactData = specificPromtactDataMap.get(previousDirection);
-				if(promtactData != null) {
-					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-				}
-				
-			}
-			
 		});
 		
 		
