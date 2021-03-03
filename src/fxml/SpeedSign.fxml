@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="370.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.programs.SpeedSignPresenter">
+   <children>
+      <Label layoutX="562.0" layoutY="10.0" text="Рекомендуемая скорость" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="40.0" prefWidth="700.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0" />
+      <Label layoutX="25.0" layoutY="50.0" text="Список программ" textFill="#1d3356" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0" />
+      <ListView fx:id="listViewAllPrograms" layoutX="25.0" layoutY="70.0" onMouseClicked="#selectProgram" prefHeight="200.0" prefWidth="240.0" stylesheets="@../css/listview.css" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="70.0" />
+      <ListView fx:id="listViewSIgnList" layoutX="325.0" layoutY="70.0" onMouseClicked="#selectSign" prefHeight="200.0" prefWidth="400.0" stylesheets="@../css/listview.css" AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="70.0" />
+      <Button layoutX="565.0" layoutY="280.0" mnemonicParsing="false" onAction="#createSign" prefWidth="75.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" AnchorPane.leftAnchor="565.0" AnchorPane.topAnchor="280.0" />
+      <Button layoutX="650.0" layoutY="280.0" mnemonicParsing="false" onAction="#deleteSign" prefWidth="75.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="280.0" />
+      <Label layoutX="644.0" layoutY="50.0" text="Список знаков" textFill="#1d3356" AnchorPane.leftAnchor="644.0" AnchorPane.topAnchor="50.0" />
+      <Button fx:id="btnOK" layoutX="650.0" layoutY="330.0" mnemonicParsing="false" onAction="#pressOK" prefWidth="75.0" style="-fx-background-radius: 10;" text="OK" textFill="#1d3356" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="330.0" />
+   </children>
+</AnchorPane>

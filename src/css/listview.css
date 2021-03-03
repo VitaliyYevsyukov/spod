@@ -1,0 +1,12 @@
+.list-view{
+	-fx-base: #d8dee3;
+    -fx-control-inner-background: #d8dee3;
+    -fx-background-color: #e8ebed;
+    /*-fx-table-cell-border-color: transparent;*/
+    /*-fx-table-header-border-color: transparent;*/
+    /*-fx-padding: 5;*/
+}
+
+.list-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: #b0b7eb;
+}

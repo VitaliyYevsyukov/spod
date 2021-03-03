@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.RoadPromtactuPresenter">
+   <children>
+      <Label fx:id="labelPromtactu" layoutX="652.0" layoutY="10.0" text="Промтакты" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="50.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0" />
+      <Label fx:id="labelPromtactControl" layoutX="25.0" layoutY="68.0" prefHeight="20.0" text="Межфазные промтакты работы контроллера" textFill="#1d3356" AnchorPane.topAnchor="68.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInterphaseTransitions" layoutX="25.0" layoutY="105.0" text="Межфазные переходы" textFill="#1d3356" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+      <Label fx:id="labelDirectionsFromThesePhases" layoutX="500.0" layoutY="105.0" text="Направления из этих фаз" textFill="#1d3356" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="105.0" />
+      <Button fx:id="buttonCreateInterphaseTransitions" layoutX="215.0" layoutY="335.0" mnemonicParsing="false" onAction="#createInterphaseTransitions" prefWidth="100.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="215.0" />
+      <Button fx:id="buttonDeleteInterphaseTransitions" layoutX="325.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteInterphase" prefWidth="100.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="325.0" />
+      <Button fx:id="buttonGenerateInterphaseTransitions" layoutX="441.0" layoutY="355.0" mnemonicParsing="false" prefWidth="100.0" text="Генерировать" textFill="#1d3356" visible="false" AnchorPane.bottomAnchor="270.0" AnchorPane.rightAnchor="259.0" />
+      <Button fx:id="buttonIndustrialTable" disable="true" layoutX="316.0" layoutY="370.0" mnemonicParsing="false" onAction="#openPromtactTable" prefHeight="25.0" prefWidth="210.0" text="Таблица промтактов" textFill="#1d3356" visible="false" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="316.0" />
+      <Separator layoutX="25.0" layoutY="413.0" prefWidth="750.0" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Label fx:id="labelPromtactForDirectionN" layoutX="220.0" layoutY="433.0" prefHeight="17.0" text="Промтакт для направления №" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="220.0" />
+      <Label fx:id="labelPromtactForDirection" layoutX="440.0" layoutY="433.0" text="0" textAlignment="CENTER" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="440.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="labelDuringTheTransitionFromPhaseN" layoutX="455.0" layoutY="433.0" text="при переходе из фазы №" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="455.0" />
+      <Label fx:id="labelInterPhaseFrom" layoutX="640.0" layoutY="433.0" text="0" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="640.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="labelToPhaseN" layoutX="660.0" layoutY="433.0" text="в фазу №" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="660.0" />
+      <Label fx:id="labelInterPhaseTo" layoutX="740.0" layoutY="433.0" text="0" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="740.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="labelEndGreenAddit" layoutX="244.0" layoutY="463.0" text="Конец зелёного дополнительного" textFill="#1d3356" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="244.0" />
+      <Label fx:id="labelEndGreenBlind" layoutX="244.0" layoutY="496.0" text="Конец зелёного мигающего" textFill="#1d3356" AnchorPane.bottomAnchor="137.0" AnchorPane.leftAnchor="244.0" />
+      <Label fx:id="labelEndYellow" layoutX="244.0" layoutY="529.0" text="Конец желтого" textFill="#1d3356" AnchorPane.bottomAnchor="104.0" AnchorPane.leftAnchor="244.0" />
+      <Label fx:id="labelEndRed" layoutX="244.0" layoutY="582.0" text="Конец красного" textFill="#1d3356" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="244.0" />
+      <Label fx:id="labelEndRedYellow" layoutX="244.0" layoutY="615.0" text="Конец красно-желтого" textFill="#1d3356" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="244.0" />
+      <TextField fx:id="textField_EndRedYellow" alignment="CENTER" layoutX="500.0" layoutY="611.0" prefWidth="180.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="textField_EndRed" alignment="CENTER" layoutX="500.0" layoutY="578.0" prefWidth="180.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="textField_EndYellow" alignment="CENTER" layoutX="500.0" layoutY="525.0" prefWidth="180.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="textField_EndGreenBlink" alignment="CENTER" layoutX="500.0" layoutY="492.0" prefWidth="180.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="textField_EndGreenAddit" alignment="CENTER" layoutX="500.0" layoutY="459.0" prefWidth="180.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></TextField>
+      <Button fx:id="buttonEstablishABasic" layoutX="25.0" layoutY="550.0" mnemonicParsing="false" onAction="#setBasePromtact" prefHeight="25.0" prefWidth="200.0" style="-fx-background-radius: 10;" text="Установит базовый" textAlignment="CENTER" textFill="#1d3356" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" />
+      <CheckBox fx:id="checkBoxFullPromtact" layoutX="565.0" layoutY="370.0" mnemonicParsing="false" onAction="#checkFullPromtact" text="Полный промтакт" textFill="#1d3356" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="565.0" />
+      <ListView fx:id="listViewInterphase" layoutX="25.0" layoutY="125.0" onMouseClicked="#selectInterphaseTransitions" prefHeight="200.0" prefWidth="400.0" stylesheets="@../css/listview.css" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="125.0" />
+      <ListView fx:id="listViewPhaseDirections" layoutX="500.0" layoutY="125.0" onMouseClicked="#selectDirectionInPhase" prefHeight="200.0" prefWidth="275.0" stylesheets="@../css/listview.css" AnchorPane.bottomAnchor="325.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="125.0" />
+      <Button fx:id="buttonCreatePhaseDirection" layoutX="565.0" layoutY="335.0" mnemonicParsing="false" onAction="#createDirectionOfInterphaseTransitions" prefWidth="100.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="565.0" />
+      <Button layoutX="675.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteDirectionOfInterphase" prefWidth="100.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="675.0" />
+      <Separator layoutX="244.0" layoutY="563.0" prefHeight="3.0" prefWidth="434.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="244.0" />
+   </children>
+</AnchorPane>

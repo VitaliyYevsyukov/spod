@@ -1,0 +1,19 @@
+.tool-bar:horizontal {
+-fx-background-color: #c5cbdb;
+-fx-border-color:  #aeb2bf;
+-fx-border-width: 0.5;
+/*linear-gradient(to bottom, derive(-fx-base,+50%), derive(-fx-base,-40%), derive(-fx-base,-20%));*/
+}
+
+.tool-barButton{
+	-fx-background-color: #c5cbdb;
+}
+
+.tool-barButton:hover{
+	-fx-background-color: #f2c46f;
+}
+
+.separator {
+    -fx-background-color: #c5cbdb;
+    -fx-background-radius: 1;
+}

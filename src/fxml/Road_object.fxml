@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.object.RoadObjectPresenter">
+   <children>
+      <Label fx:id="labelObject" layoutX="694.0" layoutY="10.0" text="Объект" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonObjects" layoutX="663.0" layoutY="68.0" mnemonicParsing="false" onAction="#showExistObjects" prefHeight="25.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="Объекты..." textFill="#1d3356" AnchorPane.leftAnchor="663.0" />
+      <Label fx:id="labelName" layoutX="25.0" layoutY="70.0" text="Название" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <TextField fx:id="txtName" layoutX="120.0" layoutY="68.0" prefHeight="25.0" prefWidth="530.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="120.0" />
+      <Separator layoutX="25.0" layoutY="50.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Separator layoutX="25.0" layoutY="110.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Label fx:id="labelCountry" layoutX="25.0" layoutY="130.0" text="Страна" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelObjectNumber" layoutX="300.0" layoutY="130.0" text="Номер объекта" textFill="#1d3356" AnchorPane.leftAnchor="300.0" />
+      <Label fx:id="labelProtocol" layoutX="25.0" layoutY="209.0" prefHeight="17.0" text="Протокол" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <ChoiceBox fx:id="chBoxCountry" layoutX="120.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="120.0" />
+      <TextField fx:id="txtMagistral" alignment="CENTER" layoutX="420.0" layoutY="205.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="420.0" />
+      <ChoiceBox fx:id="chBoxProtokol" layoutX="120.0" layoutY="205.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="120.0" />
+      <Label fx:id="labelNetworkAddress" layoutX="300.0" layoutY="169.0" text="Сетевой адрес" textFill="#1d3356" AnchorPane.leftAnchor="300.0" />
+      <Label fx:id="labelCity" layoutX="25.0" layoutY="169.0" text="Город" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelMagistral" layoutX="300.0" layoutY="209.0" text="Магистраль" textFill="#1d3356" AnchorPane.leftAnchor="300.0" />
+      <Label fx:id="labelDateOfCreation" layoutX="550.0" layoutY="130.0" text="Дата создания" textFill="#1d3356" AnchorPane.leftAnchor="550.0" />
+      <Label fx:id="labelLaunchDate" layoutX="550.0" layoutY="169.0" text="Дата запуска" textFill="#1d3356" AnchorPane.leftAnchor="550.0" />
+      <Label fx:id="labelNote" layoutX="25.0" layoutY="290.0" text="Примечание" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelTechnologist" layoutX="25.0" layoutY="249.0" text="Оператор" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelDirectionLoad1" layoutX="300.0" layoutY="241.0" text="Загрузка" textAlignment="CENTER" textFill="#1d3356" AnchorPane.leftAnchor="300.0" />
+      <TextField fx:id="txtNetworkAddress" alignment="CENTER" layoutX="420.0" layoutY="165.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="420.0" />
+      <DatePicker fx:id="dPlaunchDate" layoutX="655.0" layoutY="165.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.leftAnchor="655.0" />
+      <DatePicker fx:id="dPdateOfCreation" layoutX="655.0" layoutY="126.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.leftAnchor="655.0" />
+      <TextField fx:id="txtCity" alignment="CENTER" layoutX="120.0" layoutY="165.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="120.0" />
+      <TextField fx:id="txtObjectNumber" alignment="CENTER" layoutX="420.0" layoutY="125.0" onAction="#validateObjectNumber" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="420.0" />
+      <TextField fx:id="txtTechnologist" alignment="CENTER" layoutX="120.0" layoutY="245.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="120.0" />
+      <ChoiceBox fx:id="chCharge" layoutX="420.0" layoutY="245.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="420.0" />
+      <TextArea fx:id="txtAreaNote" layoutX="25.0" layoutY="314.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="546.0" wrapText="true" AnchorPane.leftAnchor="25.0" />
+      <Separator layoutX="25.0" layoutY="622.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <ChoiceBox fx:id="chBoxTypeKDK" layoutX="100.0" layoutY="414.0" prefHeight="25.0" prefWidth="285.0" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="414.0" />
+      <Label fx:id="labelTypeOfKDK" layoutX="25.0" layoutY="418.0" text="Тип КДК" textAlignment="CENTER" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Button fx:id="buttonReferenceBookOfTheKDK" layoutX="400.0" layoutY="414.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Справочник КДК" textFill="#1d3356" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="414.0" />
+      <Label fx:id="labelMaxChannel" layoutX="25.0" layoutY="459.0" prefHeight="15.0" prefWidth="71.0" text="Max каналов" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelMaxProgram" layoutX="25.0" layoutY="492.0" text="Max программ" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="labelMaxDirections" layoutX="25.0" layoutY="525.0" text="Max направлений" textFill="#1d3356" AnchorPane.leftAnchor="25.0" />
+      <Label fx:id="lblMAX_channels" layoutX="200.0" layoutY="459.0" text="0" textFill="#1d3356" AnchorPane.leftAnchor="200.0" />
+      <Label fx:id="lblMAX_program" layoutX="200.0" layoutY="492.0" text="0" textFill="#1d3356" AnchorPane.leftAnchor="200.0" />
+      <Label fx:id="lblMAX_directions" layoutX="200.0" layoutY="525.0" text="0" textFill="#1d3356" AnchorPane.leftAnchor="200.0" />
+      <Label fx:id="labelMaxTVP" layoutX="26.0" layoutY="558.0" text="Max ТВП" textFill="#1d3356" AnchorPane.leftAnchor="26.0" />
+      <Label fx:id="lblMAX_tvp" layoutX="200.0" layoutY="558.0" text="0" textFill="#1d3356" AnchorPane.leftAnchor="200.0" />
+      <Label fx:id="lblMAX_phases" layoutX="200.0" layoutY="591.0" text="0" textFill="#1d3356" AnchorPane.leftAnchor="200.0" />
+      <Label fx:id="labelMaxPhases" layoutX="26.0" layoutY="591.0" text="Max фаз" textFill="#1d3356" AnchorPane.leftAnchor="26.0" />
+      <Label fx:id="labelViewObject" layoutX="684.0" layoutY="459.0" text="Вид объекта" textAlignment="CENTER" textFill="#1d3356" visible="false" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="labelDirectionsLoad2" layoutX="300.0" layoutY="257.0" text="направлений" textFill="#1d3356" AnchorPane.leftAnchor="300.0" />
+      <Separator layoutX="25.0" layoutY="398.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="openConnectSettings" layoutX="590.0" layoutY="354.0" mnemonicParsing="false" onAction="#openConnectSettings" prefHeight="25.0" prefWidth="112.0" style="-fx-background-radius: 10;" text="Настройки" textFill="#1d3356" AnchorPane.leftAnchor="590.0" />
+      
+   </children>
+</AnchorPane>

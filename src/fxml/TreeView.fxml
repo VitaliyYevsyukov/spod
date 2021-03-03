@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane prefHeight="650.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.treeView.TreeViewPresenter">
+   <children>
+      <BorderPane prefHeight="650.0" prefWidth="810.0" styleClass="PaneObject" stylesheets="/css/treeview.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <BorderPane fx:id="borderPane_CHILDE" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <TreeView fx:id="treeView" prefHeight="612.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <ToolBar fx:id="toolBar" prefHeight="30.0" prefWidth="1200.0" stylesheets="/css/toolbar.css" BorderPane.alignment="CENTER">
+               <items>
+                  <Button fx:id="buttonCreate" mnemonicParsing="false" onAction="#createNewObject" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/new.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonSave" layoutX="39.0" layoutY="13.0" mnemonicParsing="false" onAction="#quickSave" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator orientation="VERTICAL" prefHeight="28.0" />
+                  <Button fx:id="buttonPrint" layoutX="262.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/print.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonOpen" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#quickOpen" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/open.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="262.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/printToFile.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonPaste" layoutX="68.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/paste.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonCopy" layoutX="107.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonCut" layoutX="136.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/cut.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonDelete" layoutX="330.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonSearch" layoutX="165.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="97.0" layoutY="10.0" orientation="VERTICAL" prefHeight="28.0" visible="false" />
+                  <Button fx:id="buttonUndo" layoutX="194.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/undo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonForward" layoutX="233.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="tool-barButton" stylesheets="/css/toolbar.css" visible="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="/image/toolbar/forvard.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Separator layoutX="223.0" layoutY="10.0" orientation="VERTICAL" prefHeight="28.0" visible="false" />
+               </items>
+            </ToolBar>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

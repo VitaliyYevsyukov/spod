@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="connection.url">jdbc:sqlserver://VITALIY:1433;databaseName=RoadTrafficControlSystem</property>
+        <property name="connection.username">server</property>
+        <property name="connection.password">server</property>
+        <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <mapping class="controllers.Employee"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<MenuBar stylesheets="/css/menubar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.menuBar.MenuBarController">
+   <menus>
+      <Menu fx:id="menuObject" mnemonicParsing="false" text="Объекты">
+         <items>
+            <MenuItem fx:id="menuItemObjects" mnemonicParsing="false" onAction="#openTreeView" text="Объекты">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/object.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="menuItemRefresh1" mnemonicParsing="false" text="Обновить">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemExportObject" disable="true" mnemonicParsing="false" text="Экспортировать объект">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/export_object.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="menuItemImportObject" disable="true" mnemonicParsing="false" text="Импортировать объект">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/import_object.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemSaveKDAR" mnemonicParsing="false" onAction="#createKDARFiles" text="Запись КДАР" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemServiseDB" disable="true" mnemonicParsing="false" text="Обслуживание БД">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/service_DB.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#appExit" text="Выход">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+         </items>
+      </Menu>
+      <Menu fx:id="menuTools" mnemonicParsing="false" text="Инструменты">
+         <items>
+            <MenuItem fx:id="menuItemIntensity" disable="true" mnemonicParsing="false" onAction="#openIntensity" text="Интенсивности" />
+            <MenuItem fx:id="menuItemSettings" mnemonicParsing="false" onAction="#JoinToDB" text="Настройки" visible="false" />
+         </items>
+      </Menu>
+      <Menu fx:id="menuService" mnemonicParsing="false" text="Сервис">
+         <items>
+            <MenuItem fx:id="menuItemRefresh2" mnemonicParsing="false" text="Обновить" visible="false">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="menuItemDiagram" disable="true" mnemonicParsing="false" text="Диаграмма">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/diagram.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="menuItemCheck" mnemonicParsing="false" text="Проверить" />
+            <MenuItem fx:id="menuItemEntry" mnemonicParsing="false" text="Запись">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/record.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="menuItemReport" mnemonicParsing="false" text="Отчет">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/report.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemWorkSimulator" disable="true" mnemonicParsing="false" text="Имитатор работы">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/movie.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemProtectionWhenDownloadingTheProgram" disable="true" mnemonicParsing="false" text="Защита при загрузки прогаммы">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/protection.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemDefaultSettings" mnemonicParsing="false" text="Настройки по умолчанию" />
+         </items>
+      </Menu>
+      <Menu fx:id="menuCOMCON_ACADEM" mnemonicParsing="false" text="КОМКОН-АСУДД">
+         <items>
+            <MenuItem fx:id="menuItemExportingDataToACSDD" disable="true" mnemonicParsing="false" text="Экспорт данных в АСУДД" />
+            <MenuItem fx:id="menuItemActivateWorkWithACSDD" disable="true" mnemonicParsing="false" text="Активировать работу с АСУДД" />
+         </items>
+      </Menu>
+      <Menu fx:id="menuAWP_technologist" mnemonicParsing="false" text="АРМ технолога">
+         <items>
+            <MenuItem fx:id="menuItemImportingDataFromTheWorkstation" disable="true" mnemonicParsing="false" text="Импорт данных из АРМ" />
+         </items>
+      </Menu>
+      <Menu fx:id="menuDirectories" mnemonicParsing="false" text="Справочники" visible="false">
+         <items>
+            <MenuItem fx:id="menuItemDesignMode" mnemonicParsing="false" text="Режим проэктировщика" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemReferenceBookOfControllers" mnemonicParsing="false" text="Справочник контроллеров" />
+            <MenuItem fx:id="menuItemDirectionOfReferrals" mnemonicParsing="false" text="Справочник направлений" />
+         </items>
+      </Menu>
+      <Menu fx:id="menuReference" mnemonicParsing="false" text="Справка">
+         <items>
+            <MenuItem fx:id="menuItemHelp" mnemonicParsing="false" text="Помощь">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/help.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" text="О программе">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="/image/menubar/about.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuItem>
+         </items>
+      </Menu>
+   </menus>
+</MenuBar>

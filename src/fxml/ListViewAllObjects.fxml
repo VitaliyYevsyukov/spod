@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.object.ListViewAllObjectPresenter">
+   <children>
+      <Label layoutX="332.0" layoutY="10.0" text="Список объектов" textFill="#1d3356" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="50.0" prefWidth="700.0" />
+      <ListView fx:id="listViewAllObjects" layoutX="25.0" layoutY="70.0" onMouseClicked="#selectObject" prefHeight="265.0" prefWidth="700.0" stylesheets="@../css/listview.css" />
+      <Button layoutX="400.0" layoutY="349.0" mnemonicParsing="false" onAction="#deleteFile" prefHeight="25.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

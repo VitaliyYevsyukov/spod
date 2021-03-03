@@ -1,0 +1,41 @@
+.grid {
+    -fx-background-color: #F4F5F6;
+    /*-fx-background-radius: 5.0;*/
+    /*-fx-background-insets: 0.0 5.0 0.0 5.0;*/
+    -fx-padding: 10;
+}
+
+.text{
+	-fx-text-fill: red;
+	-fx-font-size: 18;
+}
+
+.grid > .grid-title {
+	-fx-background-color: lightgrey;
+	-fx-border-color: #797979 #797979 #797979 #d3d3d3;
+    -fx-border-width: 0 0 0 0;
+    -fx-text-fill: #1d3356;
+}
+
+.grid > .grid-direction-cell {
+	-fx-background-color: lightgrey;
+	-fx-border-color: black;
+}
+
+.grid > .grid-cell {
+	-fx-background-color: lightgrey;
+	-fx-border-color: black;
+	-fx-border-width: 0
+}
+
+.grid > .grid-cell-no-border {
+	-fx-background-color: lightgrey;
+	-fx-border-width: 0;
+	-fx-border-color: #d3d3d3;
+}
+
+
+
+.column-header {
+	-fx-text-fill: red;
+}

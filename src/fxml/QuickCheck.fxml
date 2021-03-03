@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="530.0" prefWidth="450.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.menuBar.QuickCheckPresenter">
+   <children>
+      <ListView fx:id="listViewErrors" editable="true" focusTraversable="false" layoutX="25.0" layoutY="75.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0" />
+      <Label layoutX="318.0" layoutY="15.0" text="Запись КДАР" textFill="#1d3356">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="50.0" prefWidth="400.0" />
+      <Button fx:id="btnCheck" layoutX="175.0" layoutY="490.0" mnemonicParsing="false" onAction="#checkEvent" prefWidth="100.0" style="-fx-background-radius: 10;" text="Проверить" textFill="#1d3356" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" />
+   </children>
+</AnchorPane>

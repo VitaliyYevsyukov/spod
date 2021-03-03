@@ -1,0 +1,35 @@
+.PaneObject{
+	-fx-background-color: #1d3356;
+	/*-fx-background-color: #c5cbdb;*/
+}
+
+.tree-cell, .tree-cell:hover:empty {
+    -fx-background-color: #ddeaff ;
+    -fx-background: -fx-control-inner-background ;
+}
+
+.tree-cell:hover {
+    -fx-background-color: #ed9e0b, -fx-background ;
+    -fx-background-insets: 0, 1;
+}
+
+/*.tree-cell:account {
+    -fx-background: lightsalmon ;
+} */
+/*.tree-cell:gamecharacter {
+    -fx-background: bisque ;
+} */
+/*.tree-cell:item {
+    -fx-background: antiquewhite ;
+} */
+
+.tree-cell:selected {
+	-fx-font-style: normal ;
+	-fx-font-size: 14 pt;
+    -fx-background: #f2c46f ;
+    /*-fx-font-weight: bold;*/
+}
+
+.tree-cell:presed {
+    -fx-background: #f2c46f ;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.menuBar.JoinDBPresenter">
+   <children>
+      <TextField fx:id="txtMsDBName" layoutX="25.0" layoutY="74.0" prefWidth="325.0" />
+      <TextField fx:id="txtMsPort" layoutX="25.0" layoutY="139.0" prefWidth="150.0" />
+      <TextField fx:id="txtMsLocalHost" layoutX="25.0" layoutY="204.0" prefWidth="325.0" />
+      <TextField fx:id="txtMsUserName" layoutX="25.0" layoutY="269.0" prefWidth="325.0" />
+      <Text layoutX="25.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="База данных" />
+      <Text layoutX="25.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Порт" />
+      <Text layoutX="25.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Локальный хост" />
+      <Text layoutX="25.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя пользователя" />
+      <Text layoutX="25.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пароль" />
+      <PasswordField fx:id="txtMsPassword" layoutX="25.0" layoutY="334.0" prefWidth="325.0" />
+      <TextField fx:id="txtFbPathToDB" layoutX="440.0" layoutY="75.0" prefWidth="325.0" />
+      <Text layoutX="440.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Путь к файлу БД" />
+      <TextField fx:id="txtFbPort" layoutX="440.0" layoutY="140.0" prefWidth="150.0" />
+      <TextField fx:id="txtFbUserName" layoutX="440.0" layoutY="205.0" prefWidth="325.0" />
+      <PasswordField fx:id="txtFbPassword" layoutX="440.0" layoutY="270.0" prefWidth="325.0" />
+      <Text layoutX="440.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Порт" />
+      <Text layoutX="440.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя пользователя" />
+      <Text layoutX="440.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пароль" />
+      <Button fx:id="btnPathToDB" layoutX="775.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnPathToDBEvent" prefHeight="25.0" prefWidth="25.0" text="..." />
+      <Button fx:id="btnOK" layoutX="375.0" layoutY="375.0" mnemonicParsing="false" onAction="#buttonOkEvent" prefWidth="75.0" text="OK" />
+      <Text layoutX="25.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Подключение к MSSQL" />
+      <Text layoutX="440.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Подключение к FireBird" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+.menu-bar{
+	-fx-background-color: #c5cbdb;
+  	-fx-border-color:  #aeb2bf;
+ 	-fx-border-width: 1;
+}
+
+.menu:hover {
+    -fx-background-color: #f2c46f;
+    -fx-border-color:  #ed9e0b;
+ 	-fx-border-width: 0;
+}
+
+.menu-bar .label {
+    -fx-font-size: 12 pt;
+    -fx-font-family: "System";
+    -fx-text-fill: #1d3356;
+    /*-fx-border-color:#c5cbdb;
+    -fx-border-width: 0.5*/
+}
+
+.menu-item {
+	-fx-background-color: #ddeaff;
+}
+
+.menu-item:focused {
+     -fx-background-color: #f2c46f;
+}
+
+.separator {
+    -fx-background-color: #ddeaff;
+    -fx-background-radius: 1;
+}

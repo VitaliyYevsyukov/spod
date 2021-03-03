@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="541.0" prefWidth="650.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.object.ConnectSettingsPresenter">
+   <children>
+      <Label layoutX="321.0" layoutY="94.0" text="IP адрес" textFill="#1d3356" visible="false" />
+      <Label layoutX="25.0" layoutY="368.0" text="КДК порт" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="551.0" layoutY="10.0" text="Настройки" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="40.0" prefHeight="3.0" prefWidth="600.0" />
+      <Separator layoutX="25.0" layoutY="351.0" prefHeight="3.0" prefWidth="600.0" />
+      <Separator layoutX="25.0" layoutY="481.0" prefHeight="3.0" prefWidth="600.0" />
+      <Label layoutX="350.0" layoutY="368.0" text="ЛЭД порт" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="25.0" layoutY="94.0" text="Тип соединения" textFill="#1d3356" />
+      <Label layoutX="25.0" layoutY="134.0" text="Порт" textFill="#1d3356" />
+      <Label fx:id="tSpeed" layoutX="25.0" layoutY="172.0" text="Скорость" textFill="#1d3356" />
+      <ComboBox fx:id="comboBoxConnectType" layoutX="175.0" layoutY="90.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="txtConnectPort" layoutX="175.0" layoutY="130.0" prefWidth="100.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="txtIP" layoutX="476.0" layoutY="90.0" promptText="IP адрес" style="-fx-background-radius: 10;" />
+      <ComboBox fx:id="comboBoxConnectSpeed" layoutX="175.0" layoutY="170.0" prefWidth="100.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="25.0" layoutY="402.0" text="Порт" textFill="#1d3356" />
+      <Label layoutX="25.0" layoutY="437.0" text="Скорость" textFill="#1d3356" />
+      <ComboBox fx:id="comboBoxKDKPort" layoutX="125.0" layoutY="398.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="350.0" layoutY="437.0" text="Скорость" textFill="#1d3356" />
+      <ComboBox fx:id="comboBoxLEDPort" layoutX="450.0" layoutY="398.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-radius: 10;" />
+      <Label layoutX="350.0" layoutY="402.0" text="Порт" textFill="#1d3356" />
+      <ComboBox fx:id="comboBoxKDPSpeed" layoutX="125.0" layoutY="433.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-radius: 10;" />
+      <ComboBox fx:id="comboBoxLEDSpeed" layoutX="450.0" layoutY="433.0" prefHeight="25.0" prefWidth="105.0" style="-fx-background-radius: 10;" />
+      <Label fx:id="tDelay" layoutX="25.0" layoutY="275.0" text="Частота опроса" textFill="#1d3356" />
+      <Label fx:id="tDelayYF" layoutX="369.0" layoutY="275.0" text="Частота опроса ЖМ/ОС" textFill="#1d3356" />
+      <Label fx:id="tSleepTime" layoutX="25.0" layoutY="313.0" text="Частота реконекта" textFill="#1d3356" />
+      <TextField fx:id="txtDelay" layoutX="192.0" layoutY="271.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="txtDelayDarkYF" layoutX="536.0" layoutY="271.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="txtSleepTime" layoutX="192.0" layoutY="309.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-radius: 10;" />
+      <Button fx:id="btnOK" layoutX="540.0" layoutY="495.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="25.0" prefWidth="85.0" style="-fx-background-radius: 10;" text="OK" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <TextField fx:id="txtDNS" layoutX="476.0" layoutY="130.0" promptText="DNS адрес" style="-fx-background-radius: 10;" />
+      <TextField fx:id="txtMASK" layoutX="476.0" layoutY="170.0" promptText="Mask" style="-fx-background-radius: 10;" />
+      <Label layoutX="321.0" layoutY="134.0" text="DNS адрес" textFill="#1d3356" visible="false" />
+      <Label layoutX="321.0" layoutY="174.0" text="Mask" textFill="#1d3356" visible="false" />
+      <Label layoutX="476.0" layoutY="57.0" text="Настройки КДАР" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="57.0" text="Настройки соединения" textFill="#1d3356">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="405.0" layoutY="93.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="3.0" />
+      <Separator layoutX="25.0" layoutY="250.0" prefHeight="3.0" prefWidth="600.0" />
+      <Label layoutX="321.0" layoutY="214.0" text="Настройка ntp" textFill="#1d3356" visible="false" />
+      <TextField fx:id="txtNTP" layoutX="476.0" layoutY="210.0" promptText="ntp" style="-fx-background-radius: 10;" visible="false" />
+   </children>
+</AnchorPane>

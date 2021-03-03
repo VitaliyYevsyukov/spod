@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="850.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.directions.GroupControlPresenter">
+   <children>
+      <Label layoutX="323.0" layoutY="10.0" text="Таблица группового контроля каналов" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="25.0" layoutY="35.0" prefWidth="550.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Label layoutX="25.0" layoutY="45.0" text="Группы контроля" textFill="#1d3356" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="45.0" />
+      <ListView fx:id="listViewGroupControl" layoutX="25.0" layoutY="70.0" onMouseClicked="#selectGroupControl" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/listview.css" />
+      <Button fx:id="buttonOK" layoutX="750.0" layoutY="370.0" mnemonicParsing="false" onAction="#pressOKButton" prefHeight="25.0" prefWidth="75.0" style="-fx-background-radius: 10;" text="ОК" textFill="#1d3356" />
+      <Button layoutX="65.0" layoutY="280.0" mnemonicParsing="false" onAction="#createGroupControl" prefWidth="75.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" />
+      <Button layoutX="150.0" layoutY="280.0" mnemonicParsing="false" onAction="#deleteGroupControl" prefWidth="75.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" />
+      <Button layoutX="723.0" layoutY="280.0" mnemonicParsing="false" onAction="#deleteControlledChannel" prefWidth="100.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" />
+      <Button layoutX="610.0" layoutY="280.0" mnemonicParsing="false" onAction="#createControlledChannel" prefWidth="100.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" />
+      <Button layoutX="673.0" layoutY="325.0" mnemonicParsing="false" onAction="#autoFillEvent" prefWidth="150.0" style="-fx-background-radius: 10;" text="Автозаполнение" textFill="#1d3356" />
+      <ListView fx:id="listViewControlledChannel" layoutX="323.0" layoutY="70.0" onMouseClicked="#selectControlledChannel" prefHeight="200.0" prefWidth="500.0" stylesheets="@../css/listview.css" />
+      <Label layoutX="325.0" layoutY="45.0" text="Контролируемые направления в этой группе" textFill="#1d3356" />
+      <Separator layoutX="25.0" layoutY="315.0" prefWidth="550.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Separator layoutX="25.0" layoutY="360.0" prefWidth="550.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+   </children>
+</AnchorPane>

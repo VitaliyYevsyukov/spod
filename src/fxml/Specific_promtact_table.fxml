@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="tableViewSpecificPromtactTable" prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.SpecificPromtactTablePresenter">
+   <children>
+      <TableView fx:id="tableViewSpecificPromtactTable" layoutX="25.0" layoutY="15.0" prefHeight="270.0" prefWidth="550.0" stylesheets="@../css/tableview.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="15.0">
+        <columns>
+          <TableColumn fx:id="tableColumnNumber" prefWidth="75.0" text="Номер" />
+          <TableColumn fx:id="tableColumnTypeDirection" prefWidth="75.0" text="Тип направления" />
+            <TableColumn fx:id="tableColumnEndGreenAddit" prefWidth="75.0" text="КЗД" />
+            <TableColumn fx:id="tableColumnDurationGreenBlink" prefWidth="75.0" text="КЗМ" />
+            <TableColumn fx:id="tableColumnDurationYellow" prefWidth="75.0" text="КЖ" />
+            <TableColumn fx:id="tableColumnEndOfRed" prefWidth="75.0" text="КК" />
+            <TableColumn fx:id="tableColumnDurationRedYellow" prefWidth="75.0" text="ККЖ" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Separator layoutX="25.0" layoutY="300.0" prefWidth="550.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="buttonOK" layoutX="500.0" layoutY="315.0" mnemonicParsing="false" onAction="#buttonOKEvent" prefWidth="75.0" style="-fx-background-radius: 10;" text="OK" textFill="#1d3356" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
