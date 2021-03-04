@@ -1,18 +1,7 @@
 package presenters.promtactu;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -574,40 +563,13 @@ public class RoadPromtactuPresenter {
 					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
 				} else {
 					promtactData = specificPromtactDataMap.get(direction.getComboBoxDirNumber().getValue());
-					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-				}
-			}
-			
-			/*if (previousDirection != null) {
-				List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-				List<String> fromPhaseList1 = new ArrayList<String>();
-				
-				if(fromPhaseList != null) {
-					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-						fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-					}
-				}
-				promtactData = specificPromtactDataMap.get(previousDirection);
-				
-				if(promtactData.isFullPromtact() == true) {
-					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					// NEED EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-				}else {
-					if (fromPhaseList1.contains(previousDirection)) {
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					} else {
-						promtactData = specificPromtactDataMap.get(previousDirection);
+					if(promtactData != null){
 						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
 						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
 					}
+
 				}
-			}*/
+			}
 			
 		}
 
@@ -892,82 +854,85 @@ public class RoadPromtactuPresenter {
 			String toPhase = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxToPhase().getValue();
 			ObservableList<Integer> integersChange = FXCollections.observableArrayList();
 			ObservableList<Integer> integersNotChange = FXCollections.observableArrayList();
-			
-			// SAVE PROMTACTDATA TO PREVIOUS DIRECTION
-			if (previousDirection != null) {
-				List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-				List<String> fromPhaseList1 = new ArrayList<String>();
-				
-				if(fromPhaseList != null) {	// was edit
-					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-						fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
+
+			// save data to previous interphase
+			InterphaseTransitionsHBoxCell selectedInterphase = listViewInterphase.getSelectionModel().getSelectedItem();
+			specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(selectedInterphase);
+			String selectedDirectionNumber;
+			if(listViewPhaseDirections.getItems().size() != 0){
+				if(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue() != null){
+					selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue();
+
+					String previousFromPhase = selectedInterphase.getComboBoxFromPhase().getValue();
+					List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(previousFromPhase);
+					List<String> openDirectionsFrom = new ArrayList<>();
+
+					if(openDirectionsFromPhase != null) {	// was edit
+						for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
+							openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
+						}
 					}
-				}
-				
-				promtactData = specificPromtactDataMap.get(previousDirection);
-				
-				if(promtactData != null) {
-					if(promtactData.isFullPromtact() == true) {
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					
+
+					promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+					if(openDirectionsFrom.contains(selectedDirectionNumber)){
+						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+					}else{
+						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+					}
+
+
+				}else{
+					selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue();
+					promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+
+					if(promtactData != null){
+						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
 						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
 						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
 						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
 						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					}else {
-						if (fromPhaseList1.contains(previousDirection)) {
-							promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-							promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-							promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-						} else {
-							promtactData = specificPromtactDataMap.get(previousDirection);
-							promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-							promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-						}
 					}
+
 				}
-				clearTextFields();
 			}
-			////////////////////////////////////////////////////
-			
-			if(listViewPhaseDirections.getItems().isEmpty()) {
-				if(fromPhase != null && toPhase != null) {			// if interphase have correct values
-					
-					if(!roadDirectionList.isEmpty()) {
-						
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(listViewPhaseDirections.getItems().isEmpty()){
+				if(fromPhase != null && toPhase != null){
+
+					if(!roadDirectionList.isEmpty()){
+
 						List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseOpenDirList = mapOfOpenDirInPhase.get(fromPhase);	// get open directions list from phase
 						List<OpenDirectionInCurrentPhaseHBoxCell> toPhaseOpenDirList = mapOfOpenDirInPhase.get(toPhase);		// get open directions list to phase
-						
-						if(fromPhaseOpenDirList != null || toPhaseOpenDirList != null) {	// if phases have open direction
-							
+
+						if(fromPhaseOpenDirList.size() > 0 || toPhaseOpenDirList.size() > 0){	// if phases have open direction
+
 							List<String> fromPhaseList = new ArrayList<String>();
 							List<String> toPhaseList = new ArrayList<String>();
-							
-							if(fromPhaseOpenDirList != null) {	// was edit
-							
-								for(OpenDirectionInCurrentPhaseHBoxCell openDirectionFrom : fromPhaseOpenDirList) {	// add open direction from
-									fromPhaseList.add(openDirectionFrom.getComboBox().getValue());
-								}
+
+							for(OpenDirectionInCurrentPhaseHBoxCell openDirectionFrom : fromPhaseOpenDirList) {	// add open direction from
+								fromPhaseList.add(openDirectionFrom.getComboBox().getValue());
 							}
-							
-							if(toPhaseOpenDirList != null) {	// was edit
-							
-								for(OpenDirectionInCurrentPhaseHBoxCell openDirectionTo : toPhaseOpenDirList) {		// add open direction to
-									toPhaseList.add(openDirectionTo.getComboBox().getValue());
-								}
+
+							for(OpenDirectionInCurrentPhaseHBoxCell openDirectionTo : toPhaseOpenDirList) {		// add open direction to
+								toPhaseList.add(openDirectionTo.getComboBox().getValue());
 							}
-							
+
 							observableListDirectionsNumbers.clear();
 							observableListDirectionNotChangeState.clear();
-							
-							for(String directionFrom : fromPhaseList) {		// go to the list direction from	
-								if(toPhaseList.contains(directionFrom)) {	
+
+							for(String directionFrom : fromPhaseList) {		// go to the list direction from
+								if(toPhaseList.contains(directionFrom)) {
 									observableListDirectionNotChangeState.add(directionFrom);	// add if not change state
 								}else {
 									observableListDirectionsNumbers.add(directionFrom);			// add if change state
 								}
 							}
-							
-							
+
+
 							for(String directionTo : toPhaseList) {			// go to the list direction to
 								if(fromPhaseList.contains(directionTo)) {
 									observableListDirectionNotChangeState.add(directionTo);		// add if not change state
@@ -975,226 +940,216 @@ public class RoadPromtactuPresenter {
 									observableListDirectionsNumbers.add(directionTo);			// add if change state
 								}
 							}
-							
-							
+
+
 							for(RoadDirection direction : roadDirectionList) {			// do to all directions
 								String dirNumber = direction.getRoadDirections_number();
-								
-								if(!observableListDirectionsNumbers.contains(dirNumber)) {	// if direction exist in the list of changes direction - skip 
+
+								if(!observableListDirectionsNumbers.contains(dirNumber)) {	// if direction exist in the list of changes direction - skip
 									observableListDirectionNotChangeState.add(dirNumber); // add in the list of not changes direction
 								}
-								
+
 							}
-							
-							
+
+
 							Set<String> set = new LinkedHashSet<>();					// remove repeating numbers from changes list
 							set.addAll(observableListDirectionNotChangeState);
 							observableListDirectionNotChangeState.clear();
 							observableListDirectionNotChangeState.addAll(set);
-							
-							
+
+
 							for(PhaseDirectionsHBoxCell existDirection : listViewPhaseDirections.getItems()) {			// remove directions number that was created
 								String existNumberWhichChange = existDirection.getComboBoxDirNumber().getValue();
 								String existNumberWhichNotChange = existDirection.getComboBoxNotChangeStateDirection().getValue();
 								observableListDirectionsNumbers.removeIf(direction -> direction.equals(existNumberWhichChange));
 								observableListDirectionNotChangeState.removeIf(direction -> direction.equals(existNumberWhichNotChange));
 							}
-							
+
 							// sort direction which change
 							for (String number : observableListDirectionsNumbers) {
 								integersChange.add(Integer.parseInt(number));
 							}
-							
+
 							Collections.sort(integersChange);
-	
+
 							for (Integer i : integersChange) {
 								comboBoxValuesWhichChangeState.add(i.toString());
 							}
-							/////////////////////////////////////////////////////
-							
+
 							// sort direction which not change
 							for (String number : observableListDirectionNotChangeState) {
 								integersNotChange.add(Integer.parseInt(number));
 							}
-							
+
 							Collections.sort(integersNotChange);
-	
+
 							for (Integer i : integersNotChange) {
 								comboBoxValuesWhichNotChangeState.add(i.toString());
 							}
-							/////////////////////////////////////////////////////
-							
-							//if(!comboBoxValuesWhichChangeState.isEmpty() && !comboBoxValuesWhichNotChangeState.isEmpty()) {
-								
-								clearTextFields();
-								visibleField();
-								phaseDirectionsHBoxCell = new PhaseDirectionsHBoxCell();
-								phaseDirectionsHBoxCell.setObservableList(comboBoxValuesWhichChangeState);
-								phaseDirectionsHBoxCell.setObservableListNotChangeStateDirection(comboBoxValuesWhichNotChangeState);
-								phaseDirectionsHBoxCellList.add(phaseDirectionsHBoxCell);
-								phaseDirectionsHBoxCellObservableList = FXCollections.observableArrayList(phaseDirectionsHBoxCellList);
-								listViewPhaseDirections.setItems(phaseDirectionsHBoxCellObservableList);
-								phaseDirectionsHBoxCell.getComboBoxDirNumber().setDisable(false);
-								listViewPhaseDirections.getSelectionModel().select(listViewPhaseDirections.getItems().size() - 1);
-								
-								promtactData = new PromtactData();
-								
-								phaseDirectionsHBoxCell.comboBoxChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-									if (newValue != null) {
-										
-										
-										if (fromPhaseList.contains(newValue)) {				// direction will be closing 
-												textField_EndGreenBlink.setDisable(false);
-												textField_EndGreenAddit.setDisable(false);
-												textField_EndYellow.setDisable(false);
-												textField_EndRed.setDisable(true);
-												textField_EndRedYellow.setDisable(true);
-												
-											} else {
-												textField_EndGreenBlink.setDisable(true);		// direction will be opening
-												textField_EndGreenAddit.setDisable(true);
-												textField_EndYellow.setDisable(true);
-												textField_EndRed.setDisable(false);
-												textField_EndRedYellow.setDisable(false);
-												
-											}
-										}
-										
-										if(newValue != null) {
-											previousDirection = newValue;
-											specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
-											specificPromtactDataMap.put(newValue, promtactData);
-											
-											promtactData = specificPromtactDataMap.get(newValue);
-											
-											if(promtactData != null) {
-												promtactData.setFullPromtact(false);
-											}else {
-												promtactData = new PromtactData();
-												promtactData.setFullPromtact(false);
-												specificPromtactDataMap.put(newValue, promtactData);
-											}
-											
-											labelPromtactForDirection.setText(newValue);
-										}
-										
-										
-									
-								});
-								
-								
-								phaseDirectionsHBoxCell.comboBoxNotChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-									if(newValue != null) {
-										
-										
+
+							clearTextFields();
+							visibleField();
+							phaseDirectionsHBoxCell = new PhaseDirectionsHBoxCell();
+							phaseDirectionsHBoxCell.setObservableList(comboBoxValuesWhichChangeState);
+							phaseDirectionsHBoxCell.setObservableListNotChangeStateDirection(comboBoxValuesWhichNotChangeState);
+							phaseDirectionsHBoxCellList.add(phaseDirectionsHBoxCell);
+							phaseDirectionsHBoxCellObservableList = FXCollections.observableArrayList(phaseDirectionsHBoxCellList);
+							listViewPhaseDirections.setItems(phaseDirectionsHBoxCellObservableList);
+							phaseDirectionsHBoxCell.getComboBoxDirNumber().setDisable(false);
+							listViewPhaseDirections.getSelectionModel().select(listViewPhaseDirections.getItems().size() - 1);
+
+							phaseDirectionsHBoxCell.comboBoxChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->{
+								if(newValue != null){
+									promtactData = new PromtactData();
+									specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
+									if(!specificPromtactDataMap.containsKey(newValue)){
+
+										promtactData.setFullPromtact(false);
+										specificPromtactDataMap.put(newValue, promtactData);
+										System.out.println();
+									}
+									if(specificPromtactDataMap.containsKey(oldValue)){
+										specificPromtactDataMap.remove(oldValue);	// remove if change direction
+									}
+
+									labelPromtactForDirection.setText(newValue);
+
+									if (fromPhaseList.contains(newValue)) {				// direction will be closing
 										textField_EndGreenBlink.setDisable(false);
 										textField_EndGreenAddit.setDisable(false);
 										textField_EndYellow.setDisable(false);
+										textField_EndRed.setDisable(true);
+										textField_EndRedYellow.setDisable(true);
+
+										promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+										promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+										promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+
+									} else {
+										textField_EndGreenBlink.setDisable(true);		// direction will be opening
+										textField_EndGreenAddit.setDisable(true);
+										textField_EndYellow.setDisable(true);
 										textField_EndRed.setDisable(false);
 										textField_EndRedYellow.setDisable(false);
-										
-										if(newValue != null) {
-											previousDirection = newValue;
-											specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
-											specificPromtactDataMap.put(newValue, promtactData);
-											
-											promtactData = specificPromtactDataMap.get(newValue);
-											if(promtactData != null) {
-												promtactData.setFullPromtact(true);
-											}else {
-												promtactData = new PromtactData();
-												promtactData.setFullPromtact(true);
-												specificPromtactDataMap.put(newValue, promtactData);
-											}
-											
-											labelPromtactForDirection.setText(newValue);
-										}
-										
+
+										promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+										promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+
 									}
-								});
-							
-							
+								}
+							});
+
+							phaseDirectionsHBoxCell.comboBoxNotChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+								if(newValue != null) {
+
+									specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
+									if(!specificPromtactDataMap.containsKey(newValue)){
+										promtactData = new PromtactData();
+										promtactData.setFullPromtact(true);
+										specificPromtactDataMap.put(newValue, promtactData);
+										System.out.println();
+									}
+									if(specificPromtactDataMap.containsKey(oldValue)){
+										specificPromtactDataMap.remove(oldValue);	// remove if change direction
+									}
+
+									labelPromtactForDirection.setText(newValue);
+
+									textField_EndGreenBlink.setDisable(false);
+									textField_EndGreenAddit.setDisable(false);
+									textField_EndYellow.setDisable(false);
+									textField_EndRed.setDisable(false);
+									textField_EndRedYellow.setDisable(false);
+
+									promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+									promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+									promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+									promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+									promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+
+								}
+							});
+
 						}else {
 							Alert alert = new Alert(Alert.AlertType.ERROR);
 							alert.setTitle("Ошибка");
 							alert.setHeaderText("Создайте открытые направления в фазах");
-							
+
 							Stage stage = new Stage();
 							stage = (Stage)alert.getDialogPane().getScene().getWindow();
 							stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-							
+
 							alert.show();
 						}
-						
-						
+
 					}else {
 						Alert alert = new Alert(Alert.AlertType.ERROR);
 						alert.setTitle("Ошибка");
 						alert.setHeaderText("Создайте направления");
-						
+
 						Stage stage = new Stage();
 						stage = (Stage)alert.getDialogPane().getScene().getWindow();
 						stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-						
+
 						alert.show();
 					}
-					
-					
+
 				}else {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setTitle("Ошибка");
 					alert.setHeaderText("Укажите фазу перехода");
-					
+
 					Stage stage = new Stage();
 					stage = (Stage)alert.getDialogPane().getScene().getWindow();
 					stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-					
+
 					alert.show();
 				}
-			}else {	// if list view phase direction not empty
-				
+
+			}else{
+
 				PhaseDirectionsHBoxCell selectDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();
-				
-				if(selectDirection.getComboBoxDirNumber().getValue() != null || selectDirection.getComboBoxNotChangeStateDirection().getValue() != null) {	// check if combobox value is null
-				
-					if(fromPhase != null && toPhase != null) {			// if interphase have correct values
-						
+
+				if(selectDirection.getComboBoxDirNumber().getValue() != null || selectDirection.getComboBoxNotChangeStateDirection().getValue() != null) {    // check if combobox value is null
+
+					if(fromPhase != null && toPhase != null) {
+
 						if(!roadDirectionList.isEmpty()) {
-							
+
 							List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseOpenDirList = mapOfOpenDirInPhase.get(fromPhase);	// get open directions list from phase
 							List<OpenDirectionInCurrentPhaseHBoxCell> toPhaseOpenDirList = mapOfOpenDirInPhase.get(toPhase);		// get open directions list to phase
-							
-							if(fromPhaseOpenDirList != null || toPhaseOpenDirList != null) {	// if phases have open direction
-								
+
+							if(fromPhaseOpenDirList != null || toPhaseOpenDirList != null) {    // if phases have open direction
+
 								List<String> fromPhaseList = new ArrayList<String>();
 								List<String> toPhaseList = new ArrayList<String>();
-								
+
 								if(fromPhaseOpenDirList != null) {	// was edit
-									
+
 									for(OpenDirectionInCurrentPhaseHBoxCell openDirectionFrom : fromPhaseOpenDirList) {	// add open direction from
 										fromPhaseList.add(openDirectionFrom.getComboBox().getValue());
 									}
 								}
-								
+
 								if(toPhaseOpenDirList != null) {	// was edit
-								
+
 									for(OpenDirectionInCurrentPhaseHBoxCell openDirectionTo : toPhaseOpenDirList) {		// add open direction to
 										toPhaseList.add(openDirectionTo.getComboBox().getValue());
 									}
 								}
-								
+
 								observableListDirectionsNumbers.clear();
 								observableListDirectionNotChangeState.clear();
-								
-								for(String directionFrom : fromPhaseList) {		// go to the list direction from	
-									if(toPhaseList.contains(directionFrom)) {	
+
+								for(String directionFrom : fromPhaseList) {		// go to the list direction from
+									if(toPhaseList.contains(directionFrom)) {
 										observableListDirectionNotChangeState.add(directionFrom);	// add if not change state
 									}else {
 										observableListDirectionsNumbers.add(directionFrom);			// add if change state
 									}
 								}
-								
-								
+
+
 								for(String directionTo : toPhaseList) {			// go to the list direction to
 									if(fromPhaseList.contains(directionTo)) {
 										observableListDirectionNotChangeState.add(directionTo);		// add if not change state
@@ -1202,57 +1157,57 @@ public class RoadPromtactuPresenter {
 										observableListDirectionsNumbers.add(directionTo);			// add if change state
 									}
 								}
-								
-								
+
+
 								for(RoadDirection direction : roadDirectionList) {			// do to all directions
 									String dirNumber = direction.getRoadDirections_number();
-									
-									if(!observableListDirectionsNumbers.contains(dirNumber)) {	// if direction exist in the list of changes direction - skip 
+
+									if(!observableListDirectionsNumbers.contains(dirNumber)) {	// if direction exist in the list of changes direction - skip
 										observableListDirectionNotChangeState.add(dirNumber); // add in the list of not changes direction
 									}
-									
+
 								}
-								
-								
+
+
 								Set<String> set = new LinkedHashSet<>();					// remove repeating numbers from changes list
 								set.addAll(observableListDirectionNotChangeState);
 								observableListDirectionNotChangeState.clear();
 								observableListDirectionNotChangeState.addAll(set);
-								
-								
+
+
 								for(PhaseDirectionsHBoxCell existDirection : listViewPhaseDirections.getItems()) {			// remove directions number that was created
 									String existNumberWhichChange = existDirection.getComboBoxDirNumber().getValue();
 									String existNumberWhichNotChange = existDirection.getComboBoxNotChangeStateDirection().getValue();
 									observableListDirectionsNumbers.removeIf(direction -> direction.equals(existNumberWhichChange));
 									observableListDirectionNotChangeState.removeIf(direction -> direction.equals(existNumberWhichNotChange));
 								}
-								
+
 								// sort direction which change
 								for (String number : observableListDirectionsNumbers) {
 									integersChange.add(Integer.parseInt(number));
 								}
-								
+
 								Collections.sort(integersChange);
-		
+
 								for (Integer i : integersChange) {
 									comboBoxValuesWhichChangeState.add(i.toString());
 								}
 								/////////////////////////////////////////////////////
-								
+
 								// sort direction which not change
 								for (String number : observableListDirectionNotChangeState) {
 									integersNotChange.add(Integer.parseInt(number));
 								}
-								
+
 								Collections.sort(integersNotChange);
-		
+
 								for (Integer i : integersNotChange) {
 									comboBoxValuesWhichNotChangeState.add(i.toString());
 								}
 								/////////////////////////////////////////////////////
-								
+
 								if(!comboBoxValuesWhichChangeState.isEmpty() | !comboBoxValuesWhichNotChangeState.isEmpty()) {
-									
+
 									clearTextFields();
 									visibleField();
 									phaseDirectionsHBoxCell = new PhaseDirectionsHBoxCell();
@@ -1263,258 +1218,144 @@ public class RoadPromtactuPresenter {
 									listViewPhaseDirections.setItems(phaseDirectionsHBoxCellObservableList);
 									phaseDirectionsHBoxCell.getComboBoxDirNumber().setDisable(false);
 									listViewPhaseDirections.getSelectionModel().select(listViewPhaseDirections.getItems().size() - 1);
-									
-									promtactData = new PromtactData();
-									
+
 									phaseDirectionsHBoxCell.comboBoxChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-										if (newValue != null) {
-											
-											
-											if (fromPhaseList.contains(newValue)) {				// direction will be closing 
-													textField_EndGreenBlink.setDisable(false);
-													textField_EndGreenAddit.setDisable(false);
-													textField_EndYellow.setDisable(false);
-													textField_EndRed.setDisable(true);
-													textField_EndRedYellow.setDisable(true);
-													
-												} else {
-													textField_EndGreenBlink.setDisable(true);		// direction will be opening
-													textField_EndGreenAddit.setDisable(true);
-													textField_EndYellow.setDisable(true);
-													textField_EndRed.setDisable(false);
-													textField_EndRedYellow.setDisable(false);
-													
-												}
-											}
-											
-											if(newValue != null) {
-												previousDirection = newValue;
-												specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
+										if(newValue != null){
+											promtactData = new PromtactData();
+											specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
+											if(!specificPromtactDataMap.containsKey(newValue)){
+
+												promtactData.setFullPromtact(false);
 												specificPromtactDataMap.put(newValue, promtactData);
-												
-												promtactData = specificPromtactDataMap.get(newValue);
-												if(promtactData != null) {
-													promtactData.setFullPromtact(false);
-												}else {
-													promtactData = new PromtactData();
-													promtactData.setFullPromtact(false);
-													specificPromtactDataMap.put(newValue, promtactData);
-												}
-												
-												labelPromtactForDirection.setText(newValue);
+												System.out.println();
 											}
-										
+											if(specificPromtactDataMap.containsKey(oldValue)){
+												specificPromtactDataMap.remove(oldValue);	// remove if change direction
+											}
+
+											labelPromtactForDirection.setText(newValue);
+
+											if (fromPhaseList.contains(newValue)) {				// direction will be closing
+												textField_EndGreenBlink.setDisable(false);
+												textField_EndGreenAddit.setDisable(false);
+												textField_EndYellow.setDisable(false);
+												textField_EndRed.setDisable(true);
+												textField_EndRedYellow.setDisable(true);
+
+												promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+												promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+												promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+
+											} else {
+												textField_EndGreenBlink.setDisable(true);		// direction will be opening
+												textField_EndGreenAddit.setDisable(true);
+												textField_EndYellow.setDisable(true);
+												textField_EndRed.setDisable(false);
+												textField_EndRedYellow.setDisable(false);
+
+												promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+												promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+
+											}
+										}
+
 									});
-									
-									
+
 									phaseDirectionsHBoxCell.comboBoxNotChangeStateDirection.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 										if(newValue != null) {
-											
-											
+
+											specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
+											if(!specificPromtactDataMap.containsKey(newValue)){
+												promtactData = new PromtactData();
+												promtactData.setFullPromtact(true);
+												specificPromtactDataMap.put(newValue, promtactData);
+												System.out.println();
+											}
+											if(specificPromtactDataMap.containsKey(oldValue)){
+												specificPromtactDataMap.remove(oldValue);	// remove if change direction
+											}
+
+											labelPromtactForDirection.setText(newValue);
+
 											textField_EndGreenBlink.setDisable(false);
 											textField_EndGreenAddit.setDisable(false);
 											textField_EndYellow.setDisable(false);
 											textField_EndRed.setDisable(false);
 											textField_EndRedYellow.setDisable(false);
-											
-											if(newValue != null) {
-												previousDirection = newValue;
-												specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
-												specificPromtactDataMap.put(newValue, promtactData);
-												
-												promtactData = specificPromtactDataMap.get(newValue);
-												if(promtactData != null) {
-													promtactData.setFullPromtact(true);
-												}else {
-													promtactData = new PromtactData();
-													promtactData.setFullPromtact(true);
-													specificPromtactDataMap.put(newValue, promtactData);
-												}
-												
-												labelPromtactForDirection.setText(newValue);
-											}
-											
+
+											promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+											promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+											promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+											promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+											promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+
 										}
 									});
-									
-									
-									
-									
+
 								}else {
 									Alert alert = new Alert(AlertType.WARNING);
 									alert.setTitle("Внимание");
 									alert.setHeaderText("Все возможные направления были созданны");
-									
-									Stage stage = new Stage();
-									stage = (Stage)alert.getDialogPane().getScene().getWindow();
-									stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-									
-									alert.show();
-									
-									// set promtact data from selected direction
-									String fromPhase_1 = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxFromPhase().getValue();
-									String toPhase_1 = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxToPhase().getValue();
-									
-									List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(fromPhase_1);
-									List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsToPhase = mapOfOpenDirInPhase.get(toPhase_1);
-									
-									List<String> openDirectionsFrom = new ArrayList<>();
-									List<String> openDirectionsTo = new ArrayList<>();
-									
-									if(openDirectionsFromPhase != null) {
-										for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
-											openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-										}
-									}
-									
-									if(openDirectionsToPhase != null) {
-										for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsToPhase) {
-											openDirectionsTo.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-										}
-									}
-									
-									PhaseDirectionsHBoxCell selectedDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();
-									
-									if(selectedDirection.getComboBoxDirNumber().getValue() == null) {
-										//System.out.println("full");
-										
-										promtactData = specificPromtactDataMap.get(selectedDirection.getComboBoxNotChangeStateDirection().getValue());
-										
-										textField_EndGreenBlink.setDisable(false);
-										textField_EndGreenAddit.setDisable(false);
-										textField_EndYellow.setDisable(false);
-										textField_EndRed.setDisable(false);
-										textField_EndRedYellow.setDisable(false);
 
-										textField_EndGreenAddit.setText(promtactData.getRoadPromtactu_endGreenAddit());
-										textField_EndGreenBlink.setText(promtactData.getRoadPromtactu_durationGreenBlink());
-										textField_EndYellow.setText(promtactData.getRoadPromtactu_durationYellow());
-										textField_EndRed.setText(promtactData.getRoadPromtactu_endRed());
-										textField_EndRedYellow.setText(promtactData.getRoadPromtactu_durationRedYellow());
-										
-										checkBoxFullPromtact.setSelected(true);
-										
-										previousDirection = selectedDirection.getComboBoxNotChangeStateDirection().getValue();
-										
-										
-										for(PhaseDirectionsHBoxCell directionsHBoxCell : listViewPhaseDirections.getItems()) {
-											directionsHBoxCell.getComboBoxDirNumber().setDisable(true);
-											directionsHBoxCell.getComboBoxNotChangeStateDirection().setDisable(true);
-										}
-										
-										
-										selectedDirection.getComboBoxDirNumber().setDisable(true);
-										selectedDirection.getComboBoxNotChangeStateDirection().setDisable(false);
-										
-										labelPromtactForDirection.setText(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue());
-										
-									}else {
-										//System.out.println("not full");
-										
-										promtactData = specificPromtactDataMap.get(selectedDirection.getComboBoxDirNumber().getValue());
-										
-										previousDirection = selectedDirection.getComboBoxDirNumber().getValue();
-										
-										for(PhaseDirectionsHBoxCell directionsHBoxCell : listViewPhaseDirections.getItems()) {
-											directionsHBoxCell.getComboBoxDirNumber().setDisable(true);
-											directionsHBoxCell.getComboBoxNotChangeStateDirection().setDisable(true);
-										}
-										
-										selectedDirection.getComboBoxDirNumber().setDisable(false);
-										selectedDirection.getComboBoxNotChangeStateDirection().setDisable(true);
-										
-										if (openDirectionsFrom.contains(selectedDirection.getComboBoxDirNumber().getValue())) {				// direction will be closing 
-											textField_EndGreenBlink.setDisable(false);
-											textField_EndGreenAddit.setDisable(false);
-											textField_EndYellow.setDisable(false);
-											textField_EndRed.setDisable(true);
-											textField_EndRedYellow.setDisable(true);
-											
-											textField_EndGreenAddit.setText(promtactData.getRoadPromtactu_endGreenAddit());
-											textField_EndGreenBlink.setText(promtactData.getRoadPromtactu_durationGreenBlink());
-											textField_EndYellow.setText(promtactData.getRoadPromtactu_durationYellow());
-											checkBoxFullPromtact.setSelected(false);
-											
-											
-											
-										} else {
-											textField_EndGreenBlink.setDisable(true);		// direction will be opening
-											textField_EndGreenAddit.setDisable(true);
-											textField_EndYellow.setDisable(true);
-											textField_EndRed.setDisable(false);
-											textField_EndRedYellow.setDisable(false);
-											
-											textField_EndRed.setText(promtactData.getRoadPromtactu_endRed());
-											textField_EndRedYellow.setText(promtactData.getRoadPromtactu_durationRedYellow());
-											checkBoxFullPromtact.setSelected(false);
-											
-											
-										}
-										
-										labelPromtactForDirection.setText(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue());
-										
-									}
-									
-									////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-									
+									Stage stage = new Stage();
+									stage = (Stage) alert.getDialogPane().getScene().getWindow();
+									stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
+
+									alert.show();
 								}
-								
-								
+
 							}else {
 								Alert alert = new Alert(Alert.AlertType.ERROR);
 								alert.setTitle("Ошибка");
 								alert.setHeaderText("Создайте открытые направления в фазах");
-								
+
 								Stage stage = new Stage();
 								stage = (Stage)alert.getDialogPane().getScene().getWindow();
 								stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-								
+
 								alert.show();
 							}
-							
-							
+
 						}else {
 							Alert alert = new Alert(Alert.AlertType.ERROR);
 							alert.setTitle("Ошибка");
 							alert.setHeaderText("Создайте направления");
-							
+
 							Stage stage = new Stage();
 							stage = (Stage)alert.getDialogPane().getScene().getWindow();
 							stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-							
+
 							alert.show();
 						}
-						
-						
+
 					}else {
 						Alert alert = new Alert(Alert.AlertType.ERROR);
 						alert.setTitle("Ошибка");
 						alert.setHeaderText("Укажите фазу перехода");
-						
+
 						Stage stage = new Stage();
 						stage = (Stage)alert.getDialogPane().getScene().getWindow();
 						stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-						
+
 						alert.show();
 					}
-					
+
 				}else {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setTitle("Ошибка");
 					alert.setHeaderText("Укажите номер направления и\nзаполните промтакт значениями");
-					
+
 					Stage stage = new Stage();
 					stage = (Stage)alert.getDialogPane().getScene().getWindow();
 					stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-					
+
 					alert.show();
-					
+
 					selectDirection.getComboBoxDirNumber().setDisable(false);
-					
+
 				}
-				
+
 			}
-			
 			
 		}else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -1568,119 +1409,16 @@ public class RoadPromtactuPresenter {
 				selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue();
 				promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
 
-				promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-				promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-				promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-				promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-				promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+				if(promtactData != null){
+					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+				}
+
 			}
 		}
-
-
-
-		/*if (previousInterphaseTransitionsHBoxCell != null) {
-			specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(previousInterphaseTransitionsHBoxCell);
-			if (listViewPhaseDirections.getItems().size() != 0) {
-
-				
-				String fromPhase = previousInterphaseTransitionsHBoxCell.getComboBoxFromPhase().getValue();
-				String toPhase = previousInterphaseTransitionsHBoxCell.getComboBoxToPhase().getValue();
-				
-				List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(fromPhase);
-				List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsToPhase = mapOfOpenDirInPhase.get(toPhase);
-				
-				List<String> openDirectionsFrom = new ArrayList<>();
-				List<String> openDirectionsTo = new ArrayList<>();
-				
-				if(openDirectionsFromPhase != null) {	// was edit
-					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
-						openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-					}
-				}
-				
-				if(openDirectionsToPhase != null) {		// was edit
-					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsToPhase) {
-						openDirectionsTo.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-					}
-				}
-				
-				PhaseDirectionsHBoxCell direction = listViewPhaseDirections.getSelectionModel().getSelectedItem();
-				List<String> fromPhaseList1 = null;
-				
-				if(direction != null) {
-					List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-					fromPhaseList1 = new ArrayList<String>();
-					
-					if(fromPhaseList != null) {
-						for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-							fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-						}
-					}
-				}
-				
-				if(direction.getComboBoxNotChangeStateDirection().getValue() != null) {
-					promtactData = specificPromtactDataMap.get(direction.getComboBoxNotChangeStateDirection().getValue());
-					
-					if(promtactData.isFullPromtact() == true) {
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					// NEED EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					}
-					
-				}else {
-					if (fromPhaseList1.contains(direction.getComboBoxDirNumber().getValue())) {
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					} else {
-						promtactData = specificPromtactDataMap.get(direction.getComboBoxDirNumber().getValue());
-						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					}
-				}
-				
-				
-				if (previousDirection != null) {
-					List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-					List<String> fromPhaseList1 = new ArrayList<String>();
-					
-					if(fromPhaseList != null) {
-						for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-							fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-						}
-					}
-					
-					promtactData = specificPromtactDataMap.get(previousDirection);
-					
-					if(promtactData != null) {
-					
-						if(promtactData.isFullPromtact() == true) {
-							promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					// NEED EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-							promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-							promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-							promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-						}else {
-							if (fromPhaseList1.contains(previousDirection)) {
-								promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-								promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-								promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-							} else {
-								promtactData = specificPromtactDataMap.get(previousDirection);
-								promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-								promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-							}
-						}
-					
-					}
-				}
-				
-				
-				
-			}
-		}*/
 		//////////////////////////////////////////////////////////////////////////////////////
 
 		listViewPhaseDirections.getItems().clear();
@@ -1831,6 +1569,9 @@ public class RoadPromtactuPresenter {
 			
 			//System.out.println();
 			
+		}else{
+			visibleField();
+			clearTextFields();
 		}
 		
 		
@@ -1840,167 +1581,18 @@ public class RoadPromtactuPresenter {
 		InterphaseTransitionsHBoxCell selectedInterPhase = listViewInterphase.getSelectionModel().getSelectedItem();
 		specificPromtactDataMap = iRoadModel.getModel().getRoadPromtactuModel().getMapOfInterphaseSpecificPromtact().get(selectedInterPhase);
 		mapOfOpenDirInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
-		
-		/*String fromPhase = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxFromPhase().getValue();
-		String toPhase = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxToPhase().getValue();
-		
-		List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(fromPhase);
-		List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsToPhase = mapOfOpenDirInPhase.get(toPhase);
-		
-		List<String> openDirectionsFrom = new ArrayList<>();
-		List<String> openDirectionsTo = new ArrayList<>();
-		
-		if(openDirectionsFromPhase != null) {	// was edit
-		
-			for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
-				openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-			}
-		}
-		
-		if(openDirectionsToPhase != null) {		// was edit
-		
-			for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsToPhase) {
-				openDirectionsTo.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-			}	
-		}
-		
-		
-		// SAVE PROMTACTDATA TO PREVIOUS DIRECTION			
-		if (previousDirection != null) {
-			List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-			List<String> fromPhaseList1 = new ArrayList<String>();
-			
-			if(fromPhaseList != null) {
-			
-				for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-					fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-				}
-			}
-			System.out.println("Previous # " + previousDirection);
-			
-			promtactData = specificPromtactDataMap.get(previousDirection);
-			
-			if(promtactData != null) {
-			
-				if(promtactData.isFullPromtact() == true) {
-					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					// NEED EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-				}else {
-					if (fromPhaseList1.contains(previousDirection)) {
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					} else {
-						promtactData = specificPromtactDataMap.get(previousDirection);
-						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					}
-				}
-			
-			}
-			//clearTextFields();
-			//System.out.println(specificPromtactDataMap);
-		}
 
-		//////////////////////////////////////////////////////////////////////////////////////////
+		List<PhaseDirectionsHBoxCell> list = listViewPhaseDirections.getItems();
+		List<PhaseDirectionsHBoxCell> removingList = new ArrayList<>();
 
-		clearTextFields();
-		
-		PhaseDirectionsHBoxCell selectedDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();		
-		
-		if(selectedDirection != null) {
-		
-			if(selectedDirection.getComboBoxDirNumber().getValue() == null) {
-				//System.out.println("full");
-				
-				promtactData = specificPromtactDataMap.get(selectedDirection.getComboBoxNotChangeStateDirection().getValue());
-				
-				if(promtactData != null) {
-				
-					textField_EndGreenBlink.setDisable(false);
-					textField_EndGreenAddit.setDisable(false);
-					textField_EndYellow.setDisable(false);
-					textField_EndRed.setDisable(false);
-					textField_EndRedYellow.setDisable(false);
-		
-					textField_EndGreenAddit.setText(promtactData.getRoadPromtactu_endGreenAddit());
-					textField_EndGreenBlink.setText(promtactData.getRoadPromtactu_durationGreenBlink());
-					textField_EndYellow.setText(promtactData.getRoadPromtactu_durationYellow());
-					textField_EndRed.setText(promtactData.getRoadPromtactu_endRed());
-					textField_EndRedYellow.setText(promtactData.getRoadPromtactu_durationRedYellow());
-					
-					checkBoxFullPromtact.setSelected(true);
-					
-					//previousDirection = selectedDirection.getComboBoxNotChangeStateDirection().getValue();
-					
-					
-					for(PhaseDirectionsHBoxCell directionsHBoxCell : listViewPhaseDirections.getItems()) {
-						directionsHBoxCell.getComboBoxDirNumber().setDisable(true);
-						directionsHBoxCell.getComboBoxNotChangeStateDirection().setDisable(true);
-					}
-					
-					
-					selectedDirection.getComboBoxDirNumber().setDisable(true);
-					selectedDirection.getComboBoxNotChangeStateDirection().setDisable(false);
-					
-					labelPromtactForDirection.setText(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue());		
-				
-				}
-			}else {
-				//System.out.println("not full");
-				
-				promtactData = specificPromtactDataMap.get(selectedDirection.getComboBoxDirNumber().getValue());
-				
-				//previousDirection = selectedDirection.getComboBoxDirNumber().getValue();
-				
-				for(PhaseDirectionsHBoxCell directionsHBoxCell : listViewPhaseDirections.getItems()) {
-					directionsHBoxCell.getComboBoxDirNumber().setDisable(true);
-					directionsHBoxCell.getComboBoxNotChangeStateDirection().setDisable(true);
-				}
-				
-				selectedDirection.getComboBoxDirNumber().setDisable(false);
-				selectedDirection.getComboBoxNotChangeStateDirection().setDisable(true);
-				if(promtactData != null) {
-					if (openDirectionsFrom.contains(selectedDirection.getComboBoxDirNumber().getValue())) {				// direction will be closing 
-						textField_EndGreenBlink.setDisable(false);
-						textField_EndGreenAddit.setDisable(false);
-						textField_EndYellow.setDisable(false);
-						textField_EndRed.setDisable(true);
-						textField_EndRedYellow.setDisable(true);
-						
-						textField_EndGreenAddit.setText(promtactData.getRoadPromtactu_endGreenAddit());
-						textField_EndGreenBlink.setText(promtactData.getRoadPromtactu_durationGreenBlink());
-						textField_EndYellow.setText(promtactData.getRoadPromtactu_durationYellow());
-						checkBoxFullPromtact.setSelected(false);
-						
-						
-						
-					} else {
-						textField_EndGreenBlink.setDisable(true);		// direction will be opening
-						textField_EndGreenAddit.setDisable(true);
-						textField_EndYellow.setDisable(true);
-						textField_EndRed.setDisable(false);
-						textField_EndRedYellow.setDisable(false);
-						
-						textField_EndRed.setText(promtactData.getRoadPromtactu_endRed());
-						textField_EndRedYellow.setText(promtactData.getRoadPromtactu_durationRedYellow());
-						checkBoxFullPromtact.setSelected(false);
-						
-						
-					}
-				}
-				
-				
-				labelPromtactForDirection.setText(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue());
-				
+		for(PhaseDirectionsHBoxCell phaseDirectionsHBoxCell : list){
+			if(phaseDirectionsHBoxCell.getComboBoxDirNumber().getValue() == null &
+					phaseDirectionsHBoxCell.getComboBoxNotChangeStateDirection().getValue() == null){
+				removingList.add(phaseDirectionsHBoxCell);
 			}
-		
-		}*/
-		
-		
+		}
+		phaseDirectionsHBoxCellList.removeAll(removingList);
+		listViewPhaseDirections.getItems().removeAll(removingList);
 
 	}
 
@@ -2440,11 +2032,21 @@ public class RoadPromtactuPresenter {
 					promtactData = specificPromtactDataMap.get(previousDirection);
 
 					if(promtactData != null){
-						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+						if(!textField_EndGreenAddit.getText().equals("")){
+							promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+						}
+						if(!textField_EndGreenBlink.getText().equals("")){
+							promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+						}
+						if(!textField_EndYellow.getText().equals("")){
+							promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+						}
+						if(!textField_EndRedYellow.getText().equals("")){
+							promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+						}
+						if(!textField_EndRed.getText().equals("")){
+							promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+						}
 					}
 					
 				}
