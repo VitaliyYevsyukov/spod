@@ -638,69 +638,49 @@ public class RoadPromtactuPresenter {
 
 		checkBoxFullPromtact.setSelected(false);
 		visibleField();
-		
-		if(listViewInterphase.getItems().size() > 0) {
-			specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
-			if (listViewPhaseDirections.getItems().size() != 0) {
 
-				String fromPhase = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxFromPhase().getValue();
-				String toPhase = listViewInterphase.getSelectionModel().getSelectedItem().getComboBoxToPhase().getValue();
-				
+
+		// save data to previous interphase
+		InterphaseTransitionsHBoxCell selectedInterphaseToSave = listViewInterphase.getSelectionModel().getSelectedItem();
+		specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(selectedInterphaseToSave);
+		String selectedDirectionNumber;
+		if(listViewPhaseDirections.getItems().size() != 0){
+			if(listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue() != null){
+				selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxDirNumber().getValue();
+
+				String fromPhase = selectedInterphaseToSave.getComboBoxFromPhase().getValue();
 				List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsFromPhase = mapOfOpenDirInPhase.get(fromPhase);
-				List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsToPhase = mapOfOpenDirInPhase.get(toPhase);
-				
 				List<String> openDirectionsFrom = new ArrayList<>();
-				List<String> openDirectionsTo = new ArrayList<>();
-				
+
 				if(openDirectionsFromPhase != null) {	// was edit
-				
 					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsFromPhase) {
 						openDirectionsFrom.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
 					}
 				}
-				
-				if(openDirectionsToPhase != null) {		// was edit
-					for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsToPhase) {
-						openDirectionsTo.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-					}
+
+				promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+				if(openDirectionsFrom.contains(selectedDirectionNumber)){
+					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+				}else{
+					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
 				}
-				
-				if (previousDirection != null) {
-					List<OpenDirectionInCurrentPhaseHBoxCell> fromPhaseList = mapOfOpenDirInPhase.get(fromPhase);
-					List<String> fromPhaseList1 = new ArrayList<String>();
-					
-					if(fromPhaseList != null) {
-						for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : fromPhaseList) {
-							fromPhaseList1.add(openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue());
-						}
-					}
-					promtactData = specificPromtactDataMap.get(previousDirection);
-					
-					if(promtactData != null) {
-						if(promtactData.isFullPromtact() == true) {
-							promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());					
-							promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-							promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-							promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-							promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-						}else {
-							if (fromPhaseList1.contains(previousDirection)) {
-								promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-								promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-								promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-							} else {
-								promtactData = specificPromtactDataMap.get(previousDirection);
-								promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
-								promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-							}
-						}
-					
-					}
-					
-				}
-				
+
+
+			}else{
+				selectedDirectionNumber = listViewPhaseDirections.getSelectionModel().getSelectedItem().getComboBoxNotChangeStateDirection().getValue();
+				promtactData = specificPromtactDataMap.get(selectedDirectionNumber);
+
+				promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+				promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+				promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+				promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+				promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
 			}
 		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		specificPromtactDataMap = new LinkedHashMap<>();
 
@@ -2458,11 +2438,14 @@ public class RoadPromtactuPresenter {
 				
 				if(previousDirection != null) {
 					promtactData = specificPromtactDataMap.get(previousDirection);
-					promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
-					promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
-					promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
-					promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
-					promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+
+					if(promtactData != null){
+						promtactData.setRoadPromtactu_endGreenAddit(textField_EndGreenAddit.getText());
+						promtactData.setRoadPromtactu_durationGreenBlink(textField_EndGreenBlink.getText());
+						promtactData.setRoadPromtactu_durationYellow(textField_EndYellow.getText());
+						promtactData.setRoadPromtactu_durationRedYellow(textField_EndRedYellow.getText());
+						promtactData.setRoadPromtactu_endRed(textField_EndRed.getText());
+					}
 					
 				}
 				
@@ -2495,9 +2478,7 @@ public class RoadPromtactuPresenter {
 				
 				clearTextFields();
 				
-				
 				if(newValue.getComboBoxDirNumber().getValue() == null) {
-					//System.out.println("full");
 					
 					promtactData = specificPromtactDataMap.get(newValue.getComboBoxNotChangeStateDirection().getValue());
 					
