@@ -3,11 +3,7 @@ package presenters.programs;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,7 +49,8 @@ public class RoadProgramsPresenter {
 	@FXML
 	private TableColumn<ScheduleProgram, ScheduleNumber> tableColumnScheduleProgramsNumber, tableColumnScheduleProgramsNumber1;
 	@FXML
-	private TableColumn<ScheduleProgram, String> tableColumnScheduleProgramsTimeON, tableColumnScheduleProgramsDisplacement, tableColumnScheduleProgramsTimeON1, tableColumnScheduleProgramsDisplacement1;
+	private TableColumn<ScheduleProgram, String> tableColumnScheduleProgramsTimeON, tableColumnScheduleProgramsDisplacement, tableColumnScheduleProgramsTimeON1,
+			tableColumnScheduleProgramsDisplacement1;
 	@FXML
 	private TableColumn<PhaseInProgram, PhaseNumber> tableColumnPhase;
 	@FXML
@@ -63,7 +60,8 @@ public class RoadProgramsPresenter {
 	@FXML
 	private Label labelProgram, labelListAllProgram, labelProgramN, labelSchedulingControllerPrograms, labelCopySchedule1, labelCopySchedule2, labelProgramNumber;
 	@FXML
-	private Button buttonCreateProgram, buttonDeleteProgram, buttonSpeedSign, buttonCreatePhaseInProgram, buttonDeletePhaseInProgram, buttonCreateScheduleProgram, buttonDeleteScheduleProgram, buttonCopyDay, buttonCopyAllDay,
+	private Button buttonCreateProgram, buttonDeleteProgram, buttonSpeedSign, buttonCreatePhaseInProgram, buttonDeletePhaseInProgram,
+			buttonCreateScheduleProgram, buttonDeleteScheduleProgram, buttonCopyDay, buttonCopyAllDay,
 			buttonCreateScheduleProgramByDate, buttonCreateDate, buttonSwichPhase;
 	@FXML
 	private ListView<ScheduleCalendarWeekDayHBoxCell> listViewDayOfWeek;
@@ -1341,7 +1339,6 @@ public class RoadProgramsPresenter {
 
 		String selectedDay = chCopyDay.getSelectionModel().getSelectedItem();
 		List<ScheduleProgram> scheduleProgramsList = null;
-		// List<ScheduleProgram> copyList = null;
 		for (Map.Entry<ScheduleCalendarWeekDayHBoxCell, List<ScheduleProgram>> entry : mapOfWeekCalendar.entrySet()) {
 			ScheduleCalendarWeekDayHBoxCell scheduleCalendarHBoxCell = entry.getKey();
 			if (selectedDay.equals(scheduleCalendarHBoxCell.getWeekDay().getText())) {
@@ -1350,46 +1347,27 @@ public class RoadProgramsPresenter {
 			}
 		}
 
-		if (!scheduleProgramsList.isEmpty()) {
+		if(!scheduleProgramsList.isEmpty()){
+			Map<ScheduleCalendarWeekDayHBoxCell, List<ScheduleProgram>> copyScheduleProgramMap = new LinkedHashMap<>();
 
-			for (Map.Entry<ScheduleCalendarWeekDayHBoxCell, List<ScheduleProgram>> entry : mapOfWeekCalendar.entrySet()) {
-				
-				String weekDay = entry.getKey().getWeekDay().getText();
-				
-				List<ScheduleProgram> copyToList = null;
-				if (!scheduleProgramsList.equals(entry.getValue())) {
-					List<ScheduleProgram> copyList = scheduleProgramsList;
-					for (ScheduleProgram scheduleProgram : copyList) {
-						ScheduleProgram copyScheduleProgram = new ScheduleProgram();
-
-						UUID uuid = UUID.randomUUID();
-						String id = uuid.toString();
-
-						copyScheduleProgram.setScheduleProgramId(id);
-						copyScheduleProgram.setTimeONOfScheduleProgram(scheduleProgram.getTimeONOfScheduleProgram());
-						copyScheduleProgram.setNumberOfScheduleProgram(scheduleProgram.getNumberOfScheduleProgram());
-						copyScheduleProgram.setDisplacementTimeOfScheduleProgram(scheduleProgram.getDisplacementTimeOfScheduleProgram());
-
-						copyToList = entry.getValue();
-						copyToList.add(copyScheduleProgram);
-
-					}
-					entry.setValue(copyToList);
-					entry.getKey().getCheckBox().setSelected(true);
-				}
+			for(Map.Entry<ScheduleCalendarWeekDayHBoxCell, List<ScheduleProgram>> entry : mapOfWeekCalendar.entrySet()){
+				copyScheduleProgramMap.put(entry.getKey(), scheduleProgramsList);
+				entry.getKey().getCheckBox().setSelected(true);
 			}
-		} else {
+
+			iRoadModel.getModel().getRoadProgramsModel().setMapOfWeekCalendar(copyScheduleProgramMap);
+
+		}else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Ошибка");
 			alert.setHeaderText("Создайте расписание");
-			
+
 			Stage stage = new Stage();
 			stage = (Stage)alert.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
-			
+
 			alert.showAndWait();
 		}
-
 	}
 
 	public void openSpeedSign() {

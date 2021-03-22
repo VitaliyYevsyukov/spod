@@ -151,6 +151,7 @@ public class RoadPromtactuPresenter {
 		mapOfOpenDirInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
 
 		interphaseTransitionsHBoxCellList.clear();
+		observableListDirectionsNumbers.clear();
 		
 		for(Map.Entry<InterphaseTransitionsHBoxCell, Map<String, PromtactData>> entry : fullMap.entrySet()) {
 			InterphaseTransitionsHBoxCell interphaseTransitionsHBoxCell = entry.getKey();
@@ -1375,7 +1376,7 @@ public class RoadPromtactuPresenter {
 	public void selectInterphaseTransitions() {
 		mapOfDirectionSpecificPromtact = iRoadModel.getModel().getRoadPromtactuModel().getMapOfInterphaseSpecificPromtact();
 		mapOfOpenDirInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
-		
+		observableListDirectionsNumbers.clear();
 		
 		// save data to previous interphase
 		specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(previousInterphaseTransitionsHBoxCell);
