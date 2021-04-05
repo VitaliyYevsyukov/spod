@@ -502,6 +502,27 @@ public class RoadDirectionsPresenter {
 						roadDirection.setRoadDirections_control_2(Integer.toString(channel));
 						channel++;
 					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
+						channel++;
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
+						channel++;
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
+						channel++;
+					}
 				}
 			}else {
 				int channel = 1;
@@ -542,6 +563,24 @@ public class RoadDirectionsPresenter {
 						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
 						channel++;
 						roadDirection.setRoadDirections_chanal_4(Integer.toString(channel));
+						channel++;
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
+						channel++;
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
+						channel++;
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channel));
+						channel++;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channel));
 						channel++;
 					}
 				}

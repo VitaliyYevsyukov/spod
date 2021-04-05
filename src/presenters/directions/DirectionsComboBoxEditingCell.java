@@ -30,7 +30,10 @@ class DirectionsComboBoxEditingCell extends TableCell<RoadDirection, TypDirectio
             new TypDirection("Поворотная стрелка"),
             new TypDirection("Транспортное с одним красным"),
             new TypDirection("Транспортное красное и желтое"),
-            new TypDirection("Транспортное два красных"));
+            new TypDirection("Транспортное два красных"),
+            new TypDirection("Трамвайное прямо"),
+            new TypDirection("Трамвайное налево"),
+            new TypDirection("Трамвайное направо"));
 
     /*private void itemTypeDirectionLang(String lang){
         localeGUI = new Locale(lang);
