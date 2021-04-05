@@ -35,6 +35,7 @@ import presenters.programs.SwitchPhase;
 import presenters.promtactu.InterphaseTransitionsHBoxCell;
 import presenters.promtactu.PromtactData;
 import presenters.promtactu.RoadPromtactuModel;
+import presenters.promtactu.RoadPromtactuPresenter;
 import sourceKDAR.SourceKDAR;
 
 import java.io.File;
@@ -992,7 +993,7 @@ public class MenuBarController {
     public void createKDARFiles() {
     	
     	if(mainController.getModel() != null) {
-    	
+
 	    	try {
 	    		
 	    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CheckObject.fxml"));

@@ -87,16 +87,16 @@ public class MainController implements IRoadModel {
     }*/
 
     public void showTreeView(){
-        init();
-        try {
+        if (treeViewIsOpen){
+            init();
+            try{
+                DockPane dockPane = Main.getDockPane();
 
-            DockPane dockPane = Main.getDockPane();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TreeView.fxml"));
+                Pane object = fxmlLoader.load();
+                treeViewPresenter = fxmlLoader.<TreeViewPresenter>getController();
+                treeViewPresenter.setRoadController(this.roadController);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TreeView.fxml"));
-            Pane object = fxmlLoader.load();
-            treeViewPresenter = fxmlLoader.<TreeViewPresenter>getController();
-            treeViewPresenter.setRoadController(this.roadController);
-            if(treeViewIsOpen) {
                 treeViewPresenter.openRoadObject();
                 treeViewPresenter.openBottomBar();
 
@@ -104,10 +104,9 @@ public class MainController implements IRoadModel {
                 dockObject.setDockTitleBar(null);
                 dockObject.dock(dockPane, DockPos.LEFT);
                 treeViewIsOpen = false;
+            }catch (IOException e) {
+                e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     

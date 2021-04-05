@@ -1335,6 +1335,7 @@ public class RoadProgramsPresenter {
 	}
 
 	public void copyForAllDays() {
+		System.out.println("Copy for all days");
 		mapOfWeekCalendar = iRoadModel.getModel().getRoadProgramsModel().getMapOfWeekCalendar();
 
 		String selectedDay = chCopyDay.getSelectionModel().getSelectedItem();
