@@ -624,6 +624,15 @@ public class RoadDirectionsPresenter {
 						roadDirection.setRoadDirections_control_1(roadDirection.getRoadDirections_chanal_1());
 						roadDirection.setRoadDirections_control_2(roadDirection.getRoadDirections_chanal_4());
 					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+						roadDirection.setRoadDirections_control_1(roadDirection.getRoadDirections_chanal_1());
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+						roadDirection.setRoadDirections_control_1(roadDirection.getRoadDirections_chanal_1());
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+						roadDirection.setRoadDirections_control_1(roadDirection.getRoadDirections_chanal_1());
+					}
 				}
 			}else {
 				for(RoadDirection roadDirection : roadDirections) {
@@ -645,6 +654,15 @@ public class RoadDirectionsPresenter {
 					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Транспортное два красных")) {
 						roadDirection.setRoadDirections_control_1("");
 						roadDirection.setRoadDirections_control_2("");
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+						roadDirection.setRoadDirections_control_1("");
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+						roadDirection.setRoadDirections_control_1("");
+					}
+					if(roadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+						roadDirection.setRoadDirections_control_1("");
 					}
 				}
 			}
