@@ -102,6 +102,9 @@ public class SourceKDAR {
 		if(type.equals("Транспортное направление")) number_of_type = 0;
 		else if(type.equals("Поворотная стрелка")) number_of_type = 1;
 		else if(type.equals("Пешеходное")) number_of_type = 2;
+		else if(type.equals("Трамвайное налево")) number_of_type = 4;
+		else if(type.equals("Трамвайное прямо")) number_of_type = 5;
+		else if(type.equals("Трамвайное направо")) number_of_type = 6;
 		else if(type.equals("Транспортное с одним красным")) number_of_type = 12;
 		else if(type.equals("Транспортное красное и желтое")) number_of_type = 13;
 		else if(type.equals("Транспортное два красных")) number_of_type = 17;

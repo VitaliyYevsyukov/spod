@@ -14,6 +14,7 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import javafx.scene.control.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -22,15 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -62,6 +55,8 @@ public class RoadDirectionsPresenter {
 	private Label labelDirection, labelAllDirections;
 	@FXML
 	private RadioButton radioCheckControl;
+	@FXML
+	private CheckBox chBoxTram;
 
 	@FXML
 	//private static ResourceBundle bundleGUI, bundleAlert;
@@ -167,6 +162,12 @@ public class RoadDirectionsPresenter {
 		bundleAlert = ResourceBundle.getBundle("localeAlert_lang", localeAlert);
 	}*/
 
+	public void createTramGroup(){
+
+
+
+	}
+
 	///////////// Event on button 'Create direction' ////////////////
 	public void createNewDirection() {
 		System.out.println("============= Press create direction =============");
@@ -174,7 +175,281 @@ public class RoadDirectionsPresenter {
 		
 		List<RoadDirection> roadDirectionsList = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList();
 
-		if(roadDirectionsList.size() == 0) {
+		if(!chBoxTram.isSelected()){
+
+			if(roadDirectionsList.size() == 0) {
+				String number = Integer.toString(roadDirectionsList.size() + 1);
+				String directionName = "Транспортное направление";
+
+				conflictMap = iRoadModel.getModel().getRoadConflictsModel().getMapOfConflict();
+				basePromtactDataMap = iRoadModel.getModel().getRoadDirectionModel().getMapOfBasePromtact();
+
+				TypDirection type = new TypDirection(directionName);
+				roadDirection = new RoadDirection();
+				promtactData = new PromtactData();
+
+				UUID uuid = UUID.randomUUID();
+				String id = uuid.toString();
+				roadDirection.setIdDirection(id);
+
+				conflictWithDirectionList = new ArrayList<>();
+
+				directionList.add(number);
+
+				conflictMap.put(number, conflictWithDirectionList);
+				basePromtactDataMap.put(number, promtactData);
+
+				roadDirection.setRoadDirections_number(number);
+				roadDirection.setRoadDirections_typeOfDirection(type);
+				roadDirection.setRoadDirections_chanal_1("");
+				roadDirection.setRoadDirections_chanal_2("");
+				roadDirection.setRoadDirections_chanal_3("");
+				roadDirection.setRoadDirections_chanal_4("");
+				roadDirection.setRoadDirections_control_1("");
+				roadDirection.setRoadDirections_control_2("");
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(roadDirection);
+				tableViewDirections.setItems(FXCollections.observableArrayList(iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList()));
+
+				tableViewDirections.getSelectionModel().select(tableViewDirections.getItems().size() - 1);
+				btnBaseTableOfPromtact.setDisable(false);
+				btnBasePromtact.setDisable(false);
+
+			}else {
+				String typeKDK = iRoadModel.getModel().getRoadObjectModel().getRoadObjectTypeOfKDK();
+				List<TypeKDK> typeKDKsList = iRoadModel.getModel().getRoadObjectModel().getKdkTypeList();
+				List<Integer> allNumbersOfDirList = new ArrayList<>();
+
+				for(RoadDirection roadDirection : roadDirectionsList) {
+					allNumbersOfDirList.add(Integer.parseInt(roadDirection.getRoadDirections_number()));
+				}
+
+				String number = Integer.toString(Collections.max(allNumbersOfDirList) + 1);		//number for large direction number + 1
+				for (TypeKDK existedKDKType : typeKDKsList) {
+					if (existedKDKType.getName_KDK().equals(typeKDK)) {
+						int max_value = Integer.parseInt(existedKDKType.getDirections());
+
+						if (Integer.parseInt(number) <= max_value) {
+
+							String directionName = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_typeOfDirection().getTypDirection();
+
+							conflictMap = iRoadModel.getModel().getRoadConflictsModel().getMapOfConflict();
+							basePromtactDataMap = iRoadModel.getModel().getRoadDirectionModel().getMapOfBasePromtact();
+
+							TypDirection type = new TypDirection(directionName);
+							roadDirection = new RoadDirection();
+							promtactData = new PromtactData();
+
+							UUID uuid = UUID.randomUUID();
+							String id = uuid.toString();
+							roadDirection.setIdDirection(id);
+
+							conflictWithDirectionList = new ArrayList<>();;
+
+							directionList.add(number);
+
+							conflictMap.put(number, conflictWithDirectionList);
+							basePromtactDataMap.put(number, promtactData);
+
+							roadDirection.setRoadDirections_number(number);
+							roadDirection.setRoadDirections_typeOfDirection(type);
+							roadDirection.setRoadDirections_chanal_1("");
+							roadDirection.setRoadDirections_chanal_2("");
+							roadDirection.setRoadDirections_chanal_3("");
+							roadDirection.setRoadDirections_chanal_4("");
+							roadDirection.setRoadDirections_control_1("");
+							roadDirection.setRoadDirections_control_2("");
+							iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(roadDirection);
+							show(iRoadModel);
+
+							tableViewDirections.getSelectionModel().select(tableViewDirections.getItems().size() - 1);
+							btnBaseTableOfPromtact.setDisable(false);
+							btnBasePromtact.setDisable(false);
+
+						}else {
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Ошибка");
+							alert.setHeaderText("Тип контроллера не позволяет создать больше " + max_value + " направлений");
+
+							Stage stage = new Stage();
+							stage = (Stage)alert.getDialogPane().getScene().getWindow();
+							stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
+
+							alert.show();
+						}
+					}
+				}
+			}
+		}else{
+			if(roadDirectionsList.size() == 0){
+
+				int number = roadDirectionsList.size() + 1;
+				String strNumber = Integer.toString(number);
+				String tramLeft = "Трамвайное налево";
+				String tramStraight = "Трамвайное прямо";
+				String tramRight = "Трамвайное направо";
+
+				conflictMap = iRoadModel.getModel().getRoadConflictsModel().getMapOfConflict();
+				basePromtactDataMap = iRoadModel.getModel().getRoadDirectionModel().getMapOfBasePromtact();
+
+				TypDirection typeLeft = new TypDirection(tramLeft);
+				TypDirection typeStraight = new TypDirection(tramStraight);
+				TypDirection typeRight = new TypDirection(tramRight);
+
+				RoadDirection directionLeft = new RoadDirection();
+				promtactData = new PromtactData();
+				directionLeft.setRoadDirections_number(Integer.toString(number));
+				directionLeft.setRoadDirections_typeOfDirection(typeLeft);
+				directionLeft.setRoadDirections_chanal_1("");
+				directionLeft.setRoadDirections_chanal_2("");
+				directionLeft.setRoadDirections_chanal_3("");
+				directionLeft.setRoadDirections_chanal_4("");
+				directionLeft.setRoadDirections_control_1("");
+				directionLeft.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionLeft);
+
+				number++;
+				strNumber = Integer.toString(number);
+
+				RoadDirection directionStraight = new RoadDirection();
+				promtactData = new PromtactData();
+				directionStraight.setRoadDirections_number(Integer.toString(number));
+				directionStraight.setRoadDirections_typeOfDirection(typeStraight);
+				directionStraight.setRoadDirections_chanal_1("");
+				directionStraight.setRoadDirections_chanal_2("");
+				directionStraight.setRoadDirections_chanal_3("");
+				directionStraight.setRoadDirections_chanal_4("");
+				directionStraight.setRoadDirections_control_1("");
+				directionStraight.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionStraight);
+
+				number++;
+				strNumber = Integer.toString(number);
+
+				RoadDirection directionRight = new RoadDirection();
+				promtactData = new PromtactData();
+				directionRight.setRoadDirections_number(Integer.toString(number));
+				directionRight.setRoadDirections_typeOfDirection(typeRight);
+				directionRight.setRoadDirections_chanal_1("");
+				directionRight.setRoadDirections_chanal_2("");
+				directionRight.setRoadDirections_chanal_3("");
+				directionRight.setRoadDirections_chanal_4("");
+				directionRight.setRoadDirections_control_1("");
+				directionRight.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionRight);
+
+				show(iRoadModel);
+
+
+			}else{
+				int number = roadDirectionsList.size() + 1;
+				String strNumber = Integer.toString(number);
+				String tramLeft = "Трамвайное налево";
+				String tramStraight = "Трамвайное прямо";
+				String tramRight = "Трамвайное направо";
+
+				conflictMap = iRoadModel.getModel().getRoadConflictsModel().getMapOfConflict();
+				basePromtactDataMap = iRoadModel.getModel().getRoadDirectionModel().getMapOfBasePromtact();
+
+				TypDirection typeLeft = new TypDirection(tramLeft);
+				TypDirection typeStraight = new TypDirection(tramStraight);
+				TypDirection typeRight = new TypDirection(tramRight);
+
+				RoadDirection directionLeft = new RoadDirection();
+				promtactData = new PromtactData();
+				directionLeft.setRoadDirections_number(Integer.toString(number));
+				directionLeft.setRoadDirections_typeOfDirection(typeLeft);
+				directionLeft.setRoadDirections_chanal_1("");
+				directionLeft.setRoadDirections_chanal_2("");
+				directionLeft.setRoadDirections_chanal_3("");
+				directionLeft.setRoadDirections_chanal_4("");
+				directionLeft.setRoadDirections_control_1("");
+				directionLeft.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionLeft);
+
+				number++;
+				strNumber = Integer.toString(number);
+
+				RoadDirection directionStraight = new RoadDirection();
+				promtactData = new PromtactData();
+				directionStraight.setRoadDirections_number(Integer.toString(number));
+				directionStraight.setRoadDirections_typeOfDirection(typeStraight);
+				directionStraight.setRoadDirections_chanal_1("");
+				directionStraight.setRoadDirections_chanal_2("");
+				directionStraight.setRoadDirections_chanal_3("");
+				directionStraight.setRoadDirections_chanal_4("");
+				directionStraight.setRoadDirections_control_1("");
+				directionStraight.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionStraight);
+
+				number++;
+				strNumber = Integer.toString(number);
+
+				RoadDirection directionRight = new RoadDirection();
+				promtactData = new PromtactData();
+				directionRight.setRoadDirections_number(Integer.toString(number));
+				directionRight.setRoadDirections_typeOfDirection(typeRight);
+				directionRight.setRoadDirections_chanal_1("");
+				directionRight.setRoadDirections_chanal_2("");
+				directionRight.setRoadDirections_chanal_3("");
+				directionRight.setRoadDirections_chanal_4("");
+				directionRight.setRoadDirections_control_1("");
+				directionRight.setRoadDirections_control_2("");
+
+				conflictWithDirectionList = new ArrayList<>();;
+
+				directionList.add(strNumber);
+
+				conflictMap.put(strNumber, conflictWithDirectionList);
+				basePromtactDataMap.put(strNumber, promtactData);
+
+				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().add(directionRight);
+
+				show(iRoadModel);
+
+			}
+		}
+
+		/*if(roadDirectionsList.size() == 0) {
 			String number = Integer.toString(roadDirectionsList.size() + 1);
 			String directionName = "Транспортное направление";
 
@@ -275,7 +550,7 @@ public class RoadDirectionsPresenter {
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	public void deleteDirection() {
