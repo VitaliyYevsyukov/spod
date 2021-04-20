@@ -560,8 +560,31 @@ public class RoadDirectionsPresenter {
 		mapOfOpenDirectionInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
 		mapOfDirectionSpecificPromtact = iRoadModel.getModel().getRoadPromtactuModel().getMapOfInterphaseSpecificPromtact();
 		conflictMap = iRoadModel.getModel().getRoadConflictsModel().getMapOfConflict();
-		
-		int selectDirection = tableViewDirections.getSelectionModel().getSelectedIndex();
+
+		/*String tramLeft = "Трамвайное налево";
+		String tramStraight = "Трамвайное прямо";
+		String tramRight = "Трамвайное направо";*/
+
+		RoadDirection selectedRoadDirection = tableViewDirections.getSelectionModel().getSelectedItem();
+		String directionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
+		int selectedDirectionIndex = tableViewDirections.getSelectionModel().getSelectedIndex();
+		if(selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+			tableViewDirections.getItems().remove(selectedDirectionIndex - 1);
+		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+			tableViewDirections.getItems().remove(selectedDirectionIndex);
+			tableViewDirections.getItems().remove(selectedDirectionIndex - 1);
+			tableViewDirections.getItems().remove(selectedDirectionIndex - 2);
+
+
+		}
+
+		/*int selectDirection = tableViewDirections.getSelectionModel().getSelectedIndex();
 		String dirNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
 		if (selectDirection >= 0) {
 			tableViewDirections.getItems().remove(selectDirection);
@@ -621,9 +644,6 @@ public class RoadDirectionsPresenter {
 				}
 			}
 			
-			
-			
-			
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectDirection);
 			basePromtactDataMap.remove(dirNumber);
 			tableViewDirections.getSelectionModel().select(tableViewDirections.getItems().size() - 1);
@@ -637,7 +657,7 @@ public class RoadDirectionsPresenter {
 			stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
 			
 			alert.showAndWait();
-		}
+		}*/
 	}
 
 	public void openGroupControl() {
