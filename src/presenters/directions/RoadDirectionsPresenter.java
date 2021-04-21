@@ -568,12 +568,15 @@ public class RoadDirectionsPresenter {
 		RoadDirection selectedRoadDirection = tableViewDirections.getSelectionModel().getSelectedItem();
 		String selectedDirectionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
 		int selectedDirectionIndex = tableViewDirections.getSelectionModel().getSelectedIndex();
+
 		if(selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
-			String numberStraight = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
+			String numberStraightDirection = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
-			String numberRight = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
+			String numberRightDirection = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
+
+			System.out.println("Tram group to delete " + selectedDirectionNumber + ":" + numberStraightDirection + ":" + numberRightDirection);
 
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
@@ -584,7 +587,7 @@ public class RoadDirectionsPresenter {
 				List<ControlledChanelHBoxCell> controlledChanelList = entry.getValue();
 				for(ControlledChanelHBoxCell controlledChanelHBoxCell : controlledChanelList) {
 					String dirNumberControl = controlledChanelHBoxCell.getComboBoxDirection().getValue();
-					if(selectedDirectionNumber.equals(dirNumberControl) && numberStraight.equals(dirNumberControl) && numberRight.equals(dirNumberControl)) {
+					if(selectedDirectionNumber.equals(dirNumberControl) && numberStraightDirection.equals(dirNumberControl) && numberRightDirection.equals(dirNumberControl)) {
 						controlledChanelList.remove(controlledChanelHBoxCell);
 						break;
 					}
@@ -607,7 +610,7 @@ public class RoadDirectionsPresenter {
 						List<OpenDirectionInCurrentPhaseHBoxCell> listAfterRemove = new ArrayList<>();
 						for(OpenDirectionInCurrentPhaseHBoxCell openDirection : openDirectionsList) {
 							String existDirection = openDirection.getComboBox().getValue();
-							if(!selectedDirectionNumber.equals(existDirection) && !numberStraight.equals(existDirection) && !numberRight.equals(existDirection)) {
+							if(!selectedDirectionNumber.equals(existDirection) && !numberStraightDirection.equals(existDirection) && !numberRightDirection.equals(existDirection)) {
 								listAfterRemove.add(openDirection);
 							}
 						}
@@ -617,16 +620,134 @@ public class RoadDirectionsPresenter {
 			}
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+			if(!mapOfDirectionSpecificPromtact.isEmpty()) {		// remove direction from promtact interphase
+				for(Map.Entry<InterphaseTransitionsHBoxCell, Map<String, PromtactData>> entry : mapOfDirectionSpecificPromtact.entrySet()) {
+					Map<String, PromtactData> mapOfDirectionInInterphase = entry.getValue();
+					if(mapOfDirectionInInterphase.containsKey(selectedDirectionNumber)) {
+						mapOfDirectionInInterphase.remove(selectedDirectionNumber);
+						mapOfDirectionInInterphase.remove(numberStraightDirection);
+						mapOfDirectionInInterphase.remove(numberRightDirection);
+					}
+				}
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////
 
+			if(!conflictMap.isEmpty()) {
+				if(conflictMap.containsKey(selectedDirectionNumber)) {
+					conflictMap.remove(selectedDirectionNumber);
+					conflictMap.remove(numberStraightDirection);
+					conflictMap.remove(numberRightDirection);
+				}
+				for(Map.Entry<String, List<ConflictWithDirection>> entry : conflictMap.entrySet()){
+					List<ConflictWithDirection> conflictWithDirectionList = entry.getValue();
+					if(conflictWithDirectionList != null){
+						List<ConflictWithDirection> listAfterRemove = new ArrayList<>();
+						for(ConflictWithDirection conflictWithDirection : conflictWithDirectionList){
+							String conflictDirectionNumber = conflictWithDirection.getConflictWithDirection();
+							if(!selectedDirectionNumber.equals(conflictDirectionNumber) && !numberStraightDirection.equals(conflictDirectionNumber)
+										&& !numberRightDirection.equals(conflictDirectionNumber)){
+								listAfterRemove.add(conflictWithDirection);
+							}
+						}
+						conflictMap.put(entry.getKey(), listAfterRemove);
+					}
+				}
+			}
+
+			basePromtactDataMap.remove(selectedDirectionNumber);
+			basePromtactDataMap.remove(numberStraightDirection);
+			basePromtactDataMap.remove(numberRightDirection);
 
 		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+			String numberLeftDirection = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex - 1).getRoadDirections_number();
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+			String numberRightDirection = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex - 1).getRoadDirections_number();
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+
+			System.out.println("Tram group to delete " + selectedDirectionNumber + ":" + numberLeftDirection + ":" + numberRightDirection);
 
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex - 1);
+
+			// delete direction from group control
+			for(Map.Entry<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> entry : groupControlHBoxCellListMap.entrySet()) {
+				List<ControlledChanelHBoxCell> controlledChanelList = entry.getValue();
+				for(ControlledChanelHBoxCell controlledChanelHBoxCell : controlledChanelList) {
+					String dirNumberControl = controlledChanelHBoxCell.getComboBoxDirection().getValue();
+					if(selectedDirectionNumber.equals(dirNumberControl) && numberLeftDirection.equals(dirNumberControl) && numberRightDirection.equals(dirNumberControl)) {
+						controlledChanelList.remove(controlledChanelHBoxCell);
+						break;
+					}
+				}
+			}
+			Map<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> mapGroupControllAfterDelete = new LinkedHashMap<>(groupControlHBoxCellListMap);
+			for(Map.Entry<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> entry : groupControlHBoxCellListMap.entrySet()) {
+				List<ControlledChanelHBoxCell> controlledChanelList = entry.getValue();
+				if(controlledChanelList.isEmpty()) {
+					mapGroupControllAfterDelete.remove(entry.getKey());
+				}
+			}
+			iRoadModel.getModel().getRoadDirectionModel().setGroupControlHBoxCellListMap(mapGroupControllAfterDelete);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(!mapOfOpenDirectionInPhase.isEmpty()) {		// remove direction from open direction in phase
+				for(Map.Entry<String, List<OpenDirectionInCurrentPhaseHBoxCell>> entry : mapOfOpenDirectionInPhase.entrySet()) {
+					List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsList = entry.getValue();
+					if(openDirectionsList != null) {
+						List<OpenDirectionInCurrentPhaseHBoxCell> listAfterRemove = new ArrayList<>();
+						for(OpenDirectionInCurrentPhaseHBoxCell openDirection : openDirectionsList) {
+							String existDirection = openDirection.getComboBox().getValue();
+							if(!selectedDirectionNumber.equals(existDirection) && !numberLeftDirection.equals(existDirection) && !numberRightDirection.equals(existDirection)) {
+								listAfterRemove.add(openDirection);
+							}
+						}
+						mapOfOpenDirectionInPhase.put(entry.getKey(), listAfterRemove);
+					}
+				}
+			}
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(!mapOfDirectionSpecificPromtact.isEmpty()) {		// remove direction from promtact interphase
+				for(Map.Entry<InterphaseTransitionsHBoxCell, Map<String, PromtactData>> entry : mapOfDirectionSpecificPromtact.entrySet()) {
+					Map<String, PromtactData> mapOfDirectionInInterphase = entry.getValue();
+					if(mapOfDirectionInInterphase.containsKey(selectedDirectionNumber)) {
+						mapOfDirectionInInterphase.remove(selectedDirectionNumber);
+						mapOfDirectionInInterphase.remove(numberLeftDirection);
+						mapOfDirectionInInterphase.remove(numberRightDirection);
+					}
+				}
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(!conflictMap.isEmpty()) {
+				if(conflictMap.containsKey(selectedDirectionNumber)) {
+					conflictMap.remove(selectedDirectionNumber);
+					conflictMap.remove(numberLeftDirection);
+					conflictMap.remove(numberRightDirection);
+				}
+				for(Map.Entry<String, List<ConflictWithDirection>> entry : conflictMap.entrySet()){
+					List<ConflictWithDirection> conflictWithDirectionList = entry.getValue();
+					if(conflictWithDirectionList != null){
+						List<ConflictWithDirection> listAfterRemove = new ArrayList<>();
+						for(ConflictWithDirection conflictWithDirection : conflictWithDirectionList){
+							String conflictDirectionNumber = conflictWithDirection.getConflictWithDirection();
+							if(!selectedDirectionNumber.equals(conflictDirectionNumber) && !numberLeftDirection.equals(conflictDirectionNumber)
+									&& !numberRightDirection.equals(conflictDirectionNumber)){
+								listAfterRemove.add(conflictWithDirection);
+							}
+						}
+						conflictMap.put(entry.getKey(), listAfterRemove);
+					}
+				}
+			}
+
+			basePromtactDataMap.remove(selectedDirectionNumber);
+			basePromtactDataMap.remove(numberLeftDirection);
+			basePromtactDataMap.remove(numberRightDirection);
+
+
 		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
 			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
