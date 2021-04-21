@@ -566,21 +566,78 @@ public class RoadDirectionsPresenter {
 		String tramRight = "Трамвайное направо";*/
 
 		RoadDirection selectedRoadDirection = tableViewDirections.getSelectionModel().getSelectedItem();
-		String directionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
+		String selectedDirectionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
 		int selectedDirectionIndex = tableViewDirections.getSelectionModel().getSelectedIndex();
 		if(selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
+			String numberStraight = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
+			String numberRight = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().get(selectedDirectionIndex).getRoadDirections_number();
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
+
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
+
+			// delete direction from group control
+			for(Map.Entry<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> entry : groupControlHBoxCellListMap.entrySet()) {
+				List<ControlledChanelHBoxCell> controlledChanelList = entry.getValue();
+				for(ControlledChanelHBoxCell controlledChanelHBoxCell : controlledChanelList) {
+					String dirNumberControl = controlledChanelHBoxCell.getComboBoxDirection().getValue();
+					if(selectedDirectionNumber.equals(dirNumberControl) && numberStraight.equals(dirNumberControl) && numberRight.equals(dirNumberControl)) {
+						controlledChanelList.remove(controlledChanelHBoxCell);
+						break;
+					}
+				}
+			}
+			Map<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> mapGroupControllAfterDelete = new LinkedHashMap<>(groupControlHBoxCellListMap);
+			for(Map.Entry<GroupControlHBoxCell, List<ControlledChanelHBoxCell>> entry : groupControlHBoxCellListMap.entrySet()) {
+				List<ControlledChanelHBoxCell> controlledChanelList = entry.getValue();
+				if(controlledChanelList.isEmpty()) {
+					mapGroupControllAfterDelete.remove(entry.getKey());
+				}
+			}
+			iRoadModel.getModel().getRoadDirectionModel().setGroupControlHBoxCellListMap(mapGroupControllAfterDelete);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if(!mapOfOpenDirectionInPhase.isEmpty()) {		// remove direction from open direction in phase
+				for(Map.Entry<String, List<OpenDirectionInCurrentPhaseHBoxCell>> entry : mapOfOpenDirectionInPhase.entrySet()) {
+					List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsList = entry.getValue();
+					if(openDirectionsList != null) {
+						List<OpenDirectionInCurrentPhaseHBoxCell> listAfterRemove = new ArrayList<>();
+						for(OpenDirectionInCurrentPhaseHBoxCell openDirection : openDirectionsList) {
+							String existDirection = openDirection.getComboBox().getValue();
+							if(!selectedDirectionNumber.equals(existDirection) && !numberStraight.equals(existDirection) && !numberRight.equals(existDirection)) {
+								listAfterRemove.add(openDirection);
+							}
+						}
+						mapOfOpenDirectionInPhase.put(entry.getKey(), listAfterRemove);
+					}
+				}
+			}
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное прямо")){
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex - 1);
 		}else if (selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное направо")){
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 1);
+			iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex - 2);
+
 			tableViewDirections.getItems().remove(selectedDirectionIndex);
 			tableViewDirections.getItems().remove(selectedDirectionIndex - 1);
 			tableViewDirections.getItems().remove(selectedDirectionIndex - 2);
 
+
+		}else{
 
 		}
 
