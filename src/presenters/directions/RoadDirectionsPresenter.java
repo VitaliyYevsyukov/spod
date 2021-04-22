@@ -566,10 +566,11 @@ public class RoadDirectionsPresenter {
 		String tramRight = "Трамвайное направо";*/
 
 		RoadDirection selectedRoadDirection = tableViewDirections.getSelectionModel().getSelectedItem();
-		String selectedDirectionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
 		int selectedDirectionIndex = tableViewDirections.getSelectionModel().getSelectedIndex();
 
 		if(selectedDirectionIndex >= 0){
+
+			String selectedDirectionNumber = tableViewDirections.getSelectionModel().getSelectedItem().getRoadDirections_number();
 
 			if(selectedRoadDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
 				iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList().remove(selectedDirectionIndex);
@@ -1076,9 +1077,100 @@ public class RoadDirectionsPresenter {
 	}
 
 	public void autofillChannels() {
-		List<RoadDirection> roadDirections = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList();
-		
-		if(!roadDirections.isEmpty()) {
+		List<RoadDirection> roadDirectionList = iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList();
+
+		if(!roadDirectionList.isEmpty()){
+
+			if(radioCheckControl.isSelected()){
+				int channelGreen = 0;
+				int channelYellow = 0;
+				int channelRed = 1;
+
+				for(RoadDirection roadDirection : roadDirectionList){
+					String typeDirection = roadDirection.getRoadDirections_typeOfDirection().getTypDirection();
+					if(typeDirection.equals("Транспортное направление")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channelRed));
+						channelRed++;
+						channelYellow = channelRed;
+						roadDirection.setRoadDirections_chanal_2(Integer.toString(channelYellow));
+						channelYellow++;
+						channelGreen = channelYellow;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channelGreen));
+						channelGreen++;
+						channelRed = channelGreen;
+					}
+					if(typeDirection.equals("Пешеходное")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channelRed));
+						channelRed++;
+						channelGreen = channelRed;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channelGreen));
+						channelGreen++;
+						channelRed = channelGreen;
+					}
+					if(typeDirection.equals("Поворотная стрелка")){
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channelGreen));
+						channelGreen++;
+						channelRed = channelGreen;
+					}
+					if(typeDirection.equals("Транспортное с одним красным")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channelRed));
+						channelRed++;
+						channelGreen = channelRed;
+					}
+					if(typeDirection.equals("Транспортное красное и желтое")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channelRed));
+						channelRed++;
+						channelYellow = channelRed;
+						roadDirection.setRoadDirections_chanal_2(Integer.toString(channelYellow));
+						channelYellow++;
+						channelGreen = channelYellow;
+						channelRed = channelYellow;
+					}
+					if(typeDirection.equals("Транспортное два красных")){
+						roadDirection.setRoadDirections_chanal_1(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_1(Integer.toString(channelRed));
+						channelRed++;
+						channelYellow = channelRed;
+						roadDirection.setRoadDirections_chanal_2(Integer.toString(channelYellow));
+						channelYellow++;
+						channelGreen = channelYellow;
+						roadDirection.setRoadDirections_chanal_3(Integer.toString(channelGreen));
+						channelGreen++;
+						channelRed = channelGreen;
+						roadDirection.setRoadDirections_chanal_4(Integer.toString(channelRed));
+						roadDirection.setRoadDirections_control_2(Integer.toString(channelRed));
+						channelRed++;
+						channelGreen = channelRed;
+					}
+					if(typeDirection.equals("Трамвайное налево")){
+
+					}
+					if(typeDirection.equals("Трамвайное прямо")){
+
+					}
+					if(typeDirection.equals("Трамвайное направо")){
+
+					}
+				}
+			}
+
+		}else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Внимание");
+			alert.setHeaderText("Создайте направления");
+
+			Stage stage = new Stage();
+			stage = (Stage)alert.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
+
+			alert.show();
+		}
+
+		/*if(!roadDirections.isEmpty()) {
 			
 			if(radioCheckControl.isSelected()) {
 				int channel = 1;
@@ -1221,7 +1313,7 @@ public class RoadDirectionsPresenter {
 			stage.getIcons().add(new Image("image/other/komkon_logo_title.png"));
 			
 			alert.show();
-		}
+		}*/
 	}
 	
 	public void setControlDirections() {
