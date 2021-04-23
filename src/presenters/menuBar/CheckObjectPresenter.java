@@ -151,12 +151,52 @@ public class CheckObjectPresenter {
 				errorsList.add(error);
 			}else {
 				List<RoadDirection> roadDirectionsList = roadModel.getRoadDirectionModel().getRoadDirectionList();
+
+				List<RoadDirection> tramDirectionsList = new ArrayList<>();
+				for(RoadDirection roadDirection : roadDirectionsList){
+					String type = roadDirection.getRoadDirections_typeOfDirection().getTypDirection();
+					if(type.equals("Трамвайное налево") || type.equals("Трамвайное прямо") || type.equals("Трамвайное направо")){
+						tramDirectionsList.add(roadDirection);
+					}
+				}
+
+				boolean exist = true;
+				String str = "";
+				for(RoadDirection tramDirection : tramDirectionsList){
+					String greenChannel = tramDirection.getRoadDirections_chanal_3();
+					if(!greenChannel.equals("")){
+						if(tramDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
+							str = greenChannel;
+						}else{
+							if(!str.equals(greenChannel)){
+								exist = false;
+							}
+						}
+					}else{
+						String error = "- В таблице направлений";
+						errorsList.add(error);
+					}
+				}
+				if(exist == false){
+					String error = "- Для работы трамвайного светофора должны учавствовать\nвсе три трамвайных направления. Убедитесь " +
+							"в правильности\nзаполнения таблицы направлений";
+					errorsList.add(error);
+				}
+
+				/*if(tramDirectionsList.size() / 3 != 1){
+					String error = "- Для работы трамвайного светофора должны учавствовать все три трамвайных направления.\nУбедитесь " +
+							"в правильности заполнения таблицы направлений";
+					errorsList.add(error);
+				}*/
+
 				//Map<String, String> mapOfChannels = new LinkedHashMap<>();
 				for(RoadDirection roadDirection : roadDirectionsList) {
 					if(roadDirection.getRoadDirections_number().equals("")) {
 						String error = "- В таблице направлений, присутствует направление\nбез номера";
 						errorsList.add(error);
 					}else {
+						String typeDirection = roadDirection.getRoadDirections_typeOfDirection().getTypDirection();
+
 						String ch1 = roadDirection.getRoadDirections_chanal_1();	// check channel repeat
 						String ch2 = roadDirection.getRoadDirections_chanal_2();
 						String ch3 = roadDirection.getRoadDirections_chanal_3();
@@ -178,12 +218,16 @@ public class CheckObjectPresenter {
 							}
 						}
 						if(!ch3.equals("")) {
-							if(mapOfChannels.containsKey(ch3)) {
-								String error = "- В направлении № " + roadDirection.getRoadDirections_number() + " дублируется номер\nзеленого канала";
-								errorsList.add(error);
-							}else {
-								mapOfChannels.put(ch3, roadDirection.getRoadDirections_number());
+
+							if(!typeDirection.equals("Трамвайное налево") && !typeDirection.equals("Трамвайное прямо") && !typeDirection.equals("Трамвайное направо")){
+								if(mapOfChannels.containsKey(ch3)) {
+									String error = "- В направлении № " + roadDirection.getRoadDirections_number() + " дублируется номер\nзеленого канала";
+									errorsList.add(error);
+								}else {
+									mapOfChannels.put(ch3, roadDirection.getRoadDirections_number());
+								}
 							}
+
 						}
 						if(!ch4.equals("")) {
 							if(mapOfChannels.containsKey(ch4)) {

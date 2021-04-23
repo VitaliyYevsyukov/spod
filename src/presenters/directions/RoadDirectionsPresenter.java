@@ -1082,8 +1082,8 @@ public class RoadDirectionsPresenter {
 		if(!roadDirectionList.isEmpty()){
 
 			if(radioCheckControl.isSelected()){
-				int channelGreen = 0;
-				int channelYellow = 0;
+				int channelGreen = 1;
+				int channelYellow = 1;
 				int channelRed = 1;
 
 				for(RoadDirection roadDirection : roadDirectionList){
@@ -1169,8 +1169,8 @@ public class RoadDirectionsPresenter {
 					}
 				}
 			}else{
-				int channelGreen = 0;
-				int channelYellow = 0;
+				int channelGreen = 1;
+				int channelYellow = 1;
 				int channelRed = 1;
 
 				for(RoadDirection roadDirection : roadDirectionList){
