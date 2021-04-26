@@ -164,6 +164,7 @@ public class CheckObjectPresenter {
 				String str = "";
 				for(RoadDirection tramDirection : tramDirectionsList){
 					String greenChannel = tramDirection.getRoadDirections_chanal_3();
+					String redChannel = tramDirection.getRoadDirections_chanal_1();
 					if(!greenChannel.equals("")){
 						if(tramDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
 							str = greenChannel;
@@ -173,21 +174,21 @@ public class CheckObjectPresenter {
 							}
 						}
 					}else{
-						String error = "- В таблице направлений";
+						String error = "- В таблице направлений, в трамвайной группе, укажите значение\nдля зеленого канала";
 						errorsList.add(error);
 					}
+
+					if(redChannel.equals("")){
+						String error = "- В таблице направлений, в трамвайной группе, укажите значение\nдля красного канала";
+						errorsList.add(error);
+					}
+
 				}
 				if(exist == false){
 					String error = "- Для работы трамвайного светофора должны учавствовать\nвсе три трамвайных направления. Убедитесь " +
 							"в правильности\nзаполнения таблицы направлений";
 					errorsList.add(error);
 				}
-
-				/*if(tramDirectionsList.size() / 3 != 1){
-					String error = "- Для работы трамвайного светофора должны учавствовать все три трамвайных направления.\nУбедитесь " +
-							"в правильности заполнения таблицы направлений";
-					errorsList.add(error);
-				}*/
 
 				//Map<String, String> mapOfChannels = new LinkedHashMap<>();
 				for(RoadDirection roadDirection : roadDirectionsList) {
