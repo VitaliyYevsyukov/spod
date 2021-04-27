@@ -165,6 +165,7 @@ public class CheckObjectPresenter {
 				for(RoadDirection tramDirection : tramDirectionsList){
 					String greenChannel = tramDirection.getRoadDirections_chanal_3();
 					String redChannel = tramDirection.getRoadDirections_chanal_1();
+					String yellowChannel = tramDirection.getRoadDirections_chanal_2();
 					if(!greenChannel.equals("")){
 						if(tramDirection.getRoadDirections_typeOfDirection().getTypDirection().equals("Трамвайное налево")){
 							str = greenChannel;
@@ -180,6 +181,11 @@ public class CheckObjectPresenter {
 
 					if(redChannel.equals("")){
 						String error = "- В таблице направлений, в трамвайной группе, укажите значение\nдля красного канала";
+						errorsList.add(error);
+					}
+
+					if(!yellowChannel.equals("")){
+						String error = "- В таблице направлений, в трамвайной группе, удалите значение\nдля желтого канала";
 						errorsList.add(error);
 					}
 
