@@ -628,115 +628,137 @@ public class SourceKDAR {
 			int channel1red_value = 0;
 			int channel2yellow_value = 0;
 			int channel3green_value = 0;
-			int channel4edditred_value = 0;
-			
-			if(!roadDirection.getRoadDirections_chanal_1().equals("")) {	// red channel
-				byte b1 = 0;
-				byte b2 = 0;
-				byte b3 = 0;
-				byte b4 = 0;
-				
-				channel1red_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_1());
-				b1 = (byte)(1 << 5);
-				int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
-				b1 = (byte)(b1 | (dir_number - 1));
-				
-				int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
-				b2 = convert(dir_type);
-				
-				int control1 = 0;
-				int control2 = 0;
-				
-				if(!roadDirection.getRoadDirections_control_1().equals("")) {
-					control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
+			int channel4editRed_value = 0;
+
+
+
+				if(!roadDirection.getRoadDirections_chanal_1().equals("")) {	// red channel
+					byte b1 = 0;
+					byte b2 = 0;
+					byte b3 = 0;
+					byte b4 = 0;
+
+					int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
+					b2 = convert(dir_type);
+
+					channel1red_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_1());
+
+					if(dir_type == 4 || dir_type == 5 || dir_type == 6){
+						b1 = (byte)(6 << 5);
+					}else{
+						b1 = (byte)(1 << 5);
+					}
+
+					int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
+					b1 = (byte)(b1 | (dir_number - 1));
+
+					int control1 = 0;
+					int control2 = 0;
+
+					if(!roadDirection.getRoadDirections_control_1().equals("")) {
+						control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
+					}
+					if(!roadDirection.getRoadDirections_control_2().equals("")) {
+						control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
+					}
+
+					if(channel1red_value == control1 || channel1red_value == control2) {	// if is control
+
+						b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+						b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+					}
+
+					stitch[128 + (channel1red_value - 1)*4] = b1;
+					stitch[128 + (channel1red_value - 1)*4 + 1] = b2;
+					stitch[128 + (channel1red_value - 1)*4 + 2] = b3;
+					stitch[128 + (channel1red_value - 1)*4 + 3] = b4;
+
 				}
-				if(!roadDirection.getRoadDirections_control_2().equals("")) {
-					control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
+
+				if(!roadDirection.getRoadDirections_chanal_2().equals("")) {	// yellow channel
+					byte b1 = 0;
+					byte b2 = 0;
+					byte b3 = 0;
+					byte b4 = 0;
+
+					channel2yellow_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_2());
+					b1 = (byte)(3 << 5);
+					int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
+					b1 = (byte)(b1 | (dir_number - 1));
+
+					int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
+					b2 = convert(dir_type);
+
+					stitch[128 + (channel2yellow_value - 1)*4] = b1;
+					stitch[128 + (channel2yellow_value - 1)*4 + 1] = b2;
+					stitch[128 + (channel2yellow_value - 1)*4 + 2] = b3;
+					stitch[128 + (channel2yellow_value - 1)*4 + 3] = b4;
+
 				}
-				
-				if(channel1red_value == control1 || channel1red_value == control2) {	// if is control
-					
-					b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
-					b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+
+				if(!roadDirection.getRoadDirections_chanal_3().equals("")) {	// green channel
+					byte b1 = 0;
+					byte b2 = 0;
+					byte b3 = 0;
+					byte b4 = 0;
+
+					int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
+
+					channel3green_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_3());
+
+					if(dir_type == 4 || dir_type == 5 || dir_type == 6){
+						if(dir_type != 6){
+							continue;
+						}
+						b1 = (byte)(6 << 5);
+						dir_type = 3;
+					}else{
+						b1 = (byte)(5 << 5);
+					}
+
+					b2 = convert(dir_type);
+
+					int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
+					b1 = (byte)(b1 | (dir_number - 1));
+
+					stitch[128 + (channel3green_value - 1)*4] = b1;
+					stitch[128 + (channel3green_value - 1)*4 + 1] = b2;
+					stitch[128 + (channel3green_value - 1)*4 + 2] = b3;
+					stitch[128 + (channel3green_value - 1)*4 + 3] = b4;
+
 				}
-				
-				stitch[128 + (channel1red_value - 1)*4] = b1;
-				stitch[128 + (channel1red_value - 1)*4 + 1] = b2;
-				stitch[128 + (channel1red_value - 1)*4 + 2] = b3;
-				stitch[128 + (channel1red_value - 1)*4 + 3] = b4;
-				
-			}
-			
-			if(!roadDirection.getRoadDirections_chanal_2().equals("")) {	// yellow channel
-				byte b1 = 0;
-				byte b2 = 0;
-				byte b3 = 0;
-				byte b4 = 0;
-				
-				channel2yellow_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_2());
-				b1 = (byte)(3 << 5);
-				int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
-				b1 = (byte)(b1 | (dir_number - 1));
-				
-				int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
-				b2 = convert(dir_type);
-				
-				stitch[128 + (channel2yellow_value - 1)*4] = b1;
-				stitch[128 + (channel2yellow_value - 1)*4 + 1] = b2;
-				stitch[128 + (channel2yellow_value - 1)*4 + 2] = b3;
-				stitch[128 + (channel2yellow_value - 1)*4 + 3] = b4;
-				
-			}
-			
-			if(!roadDirection.getRoadDirections_chanal_3().equals("")) {	// green channel
-				byte b1 = 0;
-				byte b2 = 0;
-				byte b3 = 0;
-				byte b4 = 0;
-				
-				channel3green_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_3());
-				b1 = (byte)(5 << 5);
-				int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
-				b1 = (byte)(b1 | (dir_number - 1));
-				
-				int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
-				b2 = convert(dir_type);
-				
-				stitch[128 + (channel3green_value - 1)*4] = b1;
-				stitch[128 + (channel3green_value - 1)*4 + 1] = b2;
-				stitch[128 + (channel3green_value - 1)*4 + 2] = b3;
-				stitch[128 + (channel3green_value - 1)*4 + 3] = b4;
-				
-			}
-			
-			if(!roadDirection.getRoadDirections_chanal_4().equals("")) {	// additional red channel
-				byte b1 = 0;
-				byte b2 = 0;
-				byte b3 = 0;
-				byte b4 = 0;
-				
-				channel4edditred_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_4());
-				b1 = (byte)(2 << 5);
-				int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
-				b1 = (byte)(b1 | (dir_number - 1));
-				
-				int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
-				b2 = convert(dir_type);
-				
-				int control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
-				int control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
-				if(channel4edditred_value == control1 || channel4edditred_value == control2) {	// if is control
-					
-					b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
-					b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+
+				if(!roadDirection.getRoadDirections_chanal_4().equals("")) {	// additional red channel
+					byte b1 = 0;
+					byte b2 = 0;
+					byte b3 = 0;
+					byte b4 = 0;
+
+					channel4editRed_value = Integer.parseInt(roadDirection.getRoadDirections_chanal_4());
+					b1 = (byte)(2 << 5);
+					int dir_number = Integer.parseInt(roadDirection.getRoadDirections_number());
+					b1 = (byte)(b1 | (dir_number - 1));
+
+					int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
+					b2 = convert(dir_type);
+
+					int control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
+					int control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
+					if(channel4editRed_value == control1 || channel4editRed_value == control2) {	// if is control
+
+						b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+						b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+					}
+
+					stitch[128 + (channel4editRed_value - 1)*4] = b1;
+					stitch[128 + (channel4editRed_value - 1)*4 + 1] = b2;
+					stitch[128 + (channel4editRed_value - 1)*4 + 2] = b3;
+					stitch[128 + (channel4editRed_value - 1)*4 + 3] = b4;
+
 				}
-				
-				stitch[128 + (channel4edditred_value - 1)*4] = b1;
-				stitch[128 + (channel4edditred_value - 1)*4 + 1] = b2;
-				stitch[128 + (channel4edditred_value - 1)*4 + 2] = b3;
-				stitch[128 + (channel4edditred_value - 1)*4 + 3] = b4;
-				
-			}
+
+
+
 		}
 		
 		
