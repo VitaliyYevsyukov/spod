@@ -202,6 +202,21 @@ public class CheckObjectPresenter {
 						String error = "- В таблице направлений, присутствует направление\nбез номера";
 						errorsList.add(error);
 					}else {
+
+						// Check repeating numbers
+						List<Integer> numbersOfDirections = new ArrayList<>();
+						for(RoadDirection existedRoadDirection : roadDirectionsList){
+							String number = existedRoadDirection.getRoadDirections_number();
+							numbersOfDirections.add(Integer.parseInt(number));
+						}
+
+						Set<Integer> set = new HashSet<>(numbersOfDirections);
+						if(set.size() < numbersOfDirections.size()){
+							String error = "- В списке направлений имеются повторяющиеся номера";
+							errorsList.add(error);
+						}
+						//////////////////////////////////////////////////////////////////////////
+
 						String typeDirection = roadDirection.getRoadDirections_typeOfDirection().getTypDirection();
 
 						String ch1 = roadDirection.getRoadDirections_chanal_1();	// check channel repeat

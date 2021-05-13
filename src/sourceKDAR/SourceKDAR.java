@@ -7,14 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.enterprise.inject.Stereotype;
 
@@ -620,10 +613,8 @@ public class SourceKDAR {
 			stitch[127] = year;
 		}
 		
-		
-		
-		
 		List<RoadDirection> roadDirectionsList = roadDirectionsModel.getRoadDirectionList();	// directions, red control	$0080-$017F
+
 		for(RoadDirection roadDirection : roadDirectionsList) {
 			int channel1red_value = 0;
 			int channel2yellow_value = 0;
