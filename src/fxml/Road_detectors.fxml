@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.embed.swing.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPaneDetector" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.detector.RoadDetectorPresenter">
+<AnchorPane fx:id="anchorPaneDetector" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.detector.RoadDetectorPresenter">
    <children>
       <Label layoutX="656.0" layoutY="10.0" text="Детекторы" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -15,40 +12,40 @@
          </font>
       </Label>
       <Separator layoutX="25.0" layoutY="50.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0" />
-      <ListView fx:id="listViewDetectors" layoutX="25.0" layoutY="77.0" onMouseClicked="#selectDetector" prefHeight="200.0" prefWidth="300.0" />
+      <ListView fx:id="listViewDetectors" layoutX="25.0" layoutY="77.0" onMouseClicked="#selectDetector" prefHeight="200.0" prefWidth="300.0" style="-fx-background-radius: 10;" />
       <Label layoutX="25.0" layoutY="60.0" text="Список детекторов" textFill="#1d3356" />
-      <Button fx:id="buttonCreateDetector" layoutX="165.0" layoutY="287.0" mnemonicParsing="false" onAction="#createDetector" prefWidth="75.0" text="Создать" textFill="#1d3356" />
-      <Button fx:id="buttonDeleteDetector" layoutX="250.0" layoutY="287.0" mnemonicParsing="false" onAction="#deleteDetector" prefWidth="75.0" text="Удалить" textFill="#1d3356" />
+      <Button fx:id="buttonCreateDetector" layoutX="165.0" layoutY="287.0" mnemonicParsing="false" onAction="#createDetector" prefWidth="75.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" />
+      <Button fx:id="buttonDeleteDetector" layoutX="250.0" layoutY="287.0" mnemonicParsing="false" onAction="#deleteDetector" prefWidth="75.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" />
       <Label layoutX="350.0" layoutY="82.0" text="Модель детектора" textFill="#1d3356" />
-      <TextField fx:id="textFieldModelDetector" layoutX="550.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" />
+      <TextField fx:id="textFieldModelDetector" layoutX="550.0" layoutY="77.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
       <Label layoutX="350.0" layoutY="152.0" text="Таймаут неисправности" textFill="#1d3356" />
       <Label layoutX="350.0" layoutY="117.0" text="Расположение детектора" textFill="#1d3356" />
       <Label fx:id="labelIPCamera" layoutX="350.0" layoutY="222.0" text="IP камеры" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldLocationDetector" layoutX="550.0" layoutY="113.0" prefHeight="25.0" prefWidth="150.0" />
-      <TextField fx:id="textFieldFaultTimeOut" layoutX="550.0" layoutY="148.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="textFieldLocationDetector" layoutX="550.0" layoutY="113.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="textFieldFaultTimeOut" layoutX="550.0" layoutY="148.0" prefHeight="25.0" prefWidth="50.0" style="-fx-background-radius: 10;" />
       <Separator layoutX="25.0" layoutY="396.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
       <Label fx:id="labelConnectionType" layoutX="350.0" layoutY="187.0" text="Тип подключения" textFill="#1d3356" visible="false" />
-      <ChoiceBox fx:id="choiceBoxConnectionType" layoutX="550.0" layoutY="183.0" prefWidth="150.0" visible="false" />
-      <TextField fx:id="textFieldIPCamera" layoutX="550.0" layoutY="218.0" prefHeight="25.0" prefWidth="150.0" visible="false" />
+      <ChoiceBox fx:id="choiceBoxConnectionType" layoutX="550.0" layoutY="183.0" prefWidth="150.0" style="-fx-background-radius: 10;" visible="false" />
+      <TextField fx:id="textFieldIPCamera" layoutX="550.0" layoutY="218.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelPeriodInterrogation" layoutX="350.0" layoutY="432.0" text="Период опроса " textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldPeriodInterrogation" layoutX="500.0" layoutY="430.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+      <TextField fx:id="textFieldPeriodInterrogation" layoutX="500.0" layoutY="430.0" prefHeight="25.0" prefWidth="75.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelPeriodSaving" layoutX="350.0" layoutY="469.0" text="Период записи в БД" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldPeriodSaving" disable="true" layoutX="500.0" layoutY="465.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+      <TextField fx:id="textFieldPeriodSaving" disable="true" layoutX="500.0" layoutY="465.0" prefHeight="25.0" prefWidth="75.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelPortCamera" layoutX="350.0" layoutY="257.0" text="Порт" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldPortCamera" layoutX="550.0" layoutY="253.0" prefWidth="50.0" visible="false" />
+      <TextField fx:id="textFieldPortCamera" layoutX="550.0" layoutY="253.0" prefWidth="50.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelPortXML" layoutX="350.0" layoutY="292.0" text="Порт XML" textFill="#1d3356" visible="false" />
       <Label fx:id="labelPortHTTP" layoutX="350.0" layoutY="327.0" text="Порт HTTP" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldPortXML" layoutX="550.0" layoutY="288.0" prefWidth="50.0" visible="false" />
-      <TextField fx:id="textFieldPortHTTP" layoutX="550.0" layoutY="323.0" prefWidth="50.0" visible="false" />
+      <TextField fx:id="textFieldPortXML" layoutX="550.0" layoutY="288.0" prefWidth="50.0" style="-fx-background-radius: 10;" visible="false" />
+      <TextField fx:id="textFieldPortHTTP" layoutX="550.0" layoutY="323.0" prefWidth="50.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelSPIAddress" layoutX="350.0" layoutY="222.0" text="Канал spi" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldSPIAddress" layoutX="550.0" layoutY="218.0" prefWidth="50.0" visible="false" />
+      <TextField fx:id="textFieldSPIAddress" layoutX="550.0" layoutY="218.0" prefWidth="50.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelResponse" layoutX="350.0" layoutY="249.0" text="Задержка на &#10;срабатывание" textFill="#1d3356" visible="false" />
-      <TextField fx:id="textFieldResponse" layoutX="550.0" layoutY="253.0" prefWidth="50.0" visible="false" />
-      <ListView fx:id="listViewZones" layoutX="25.0" layoutY="432.0" onMouseClicked="#selectZone" prefHeight="165.0" prefWidth="300.0" visible="false" />
+      <TextField fx:id="textFieldResponse" layoutX="550.0" layoutY="253.0" prefWidth="50.0" style="-fx-background-radius: 10;" visible="false" />
+      <ListView fx:id="listViewZones" layoutX="25.0" layoutY="432.0" onMouseClicked="#selectZone" prefHeight="165.0" prefWidth="300.0" style="-fx-background-radius: 10;" visible="false" />
       <Label fx:id="labelListZones" layoutX="25.0" layoutY="410.0" text="Список зон" textFill="#1d3356" visible="false" />
       <CheckBox fx:id="checkBoxSave" layoutX="624.0" layoutY="469.0" mnemonicParsing="false" text="Сохранять данные в БД" textFill="#1d3356" visible="false" />
-      <Button fx:id="buttonDeleteZone" layoutX="250.0" layoutY="607.0" mnemonicParsing="false" onAction="#deleteZone" prefWidth="75.0" text="Удалить" textFill="#1d3356" visible="false" />
-      <Button fx:id="buttonCreateZone" layoutX="165.0" layoutY="607.0" mnemonicParsing="false" onAction="#createZone" prefWidth="75.0" text="Создать" textFill="#1d3356" visible="false" />
+      <Button fx:id="buttonDeleteZone" layoutX="250.0" layoutY="607.0" mnemonicParsing="false" onAction="#deleteZone" prefWidth="75.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" visible="false" />
+      <Button fx:id="buttonCreateZone" layoutX="165.0" layoutY="607.0" mnemonicParsing="false" onAction="#createZone" prefWidth="75.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" visible="false" />
       <Label fx:id="labelZoneSetting" layoutX="25.0" layoutY="376.0" text="Параметры зон" textFill="#1d3356" visible="false">
          <font>
             <Font size="14.0" />

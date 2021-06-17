@@ -152,12 +152,25 @@ public class RoadDetectorPresenter {
 		if(previousDetectorsList != null) {
 			if(previousDetectorsList.size() == 1) {
 				Detector detector = previousDetectorsList.get(0);
-				detector.setModelDetector(textFieldModelDetector.getText());
+				/*detector.setModelDetector(textFieldModelDetector.getText());
 				detector.setLocationDetector(textFieldLocationDetector.getText());
 				detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
 				detector.setResponse(textFieldResponse.getText());
 				detector.setConnectionType(choiceBoxConnectionType.getValue());
+				detector.setSpi(textFieldSPIAddress.getText());*/
+				detector.setModelDetector(textFieldModelDetector.getText());
+				detector.setLocationDetector(textFieldLocationDetector.getText());
+				detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
+				detector.setConnectionType(choiceBoxConnectionType.getValue());
+				detector.setIPDetector(textFieldIPCamera.getText());
+				detector.setPort(textFieldPortCamera.getText());
+				detector.setPortXML(textFieldPortXML.getText());
+				detector.setPortHTTP(textFieldPortHTTP.getText());
+				detector.setResponse(textFieldResponse.getText());
 				detector.setSpi(textFieldSPIAddress.getText());
+				detector.setPeriodInterrogation(textFieldPeriodInterrogation.getText());
+				detector.setPeriodSaving(textFieldPeriodSaving.getText());
+				detector.setRootID(listViewDetectors.getSelectionModel().getSelectedItem().getLabelNumberOfDetector().getText());
 			}
 			if(previousDetectorsList.size() > 1) {
 				String index = listViewZones.getSelectionModel().getSelectedItem().getLabelZoneNumber().getText();
@@ -312,15 +325,29 @@ public class RoadDetectorPresenter {
 			if(detectorsList != null) {
 				if(detectorsList.size() == 1) {
 					Detector detector = detectorsList.get(0);
-					detector.setModelDetector(textFieldModelDetector.getText());
+					/*detector.setModelDetector(textFieldModelDetector.getText());
 					detector.setLocationDetector(textFieldLocationDetector.getText());
 					detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
 					detector.setResponse(textFieldResponse.getText());
 					detector.setConnectionType(choiceBoxConnectionType.getValue());
 					detector.setSpi(textFieldSPIAddress.getText());
+					detector.setRootID(listViewDetectors.getSelectionModel().getSelectedItem().getLabelNumberOfDetector().getText());*/
+					detector.setModelDetector(textFieldModelDetector.getText());
+					detector.setLocationDetector(textFieldLocationDetector.getText());
+					detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
+					detector.setConnectionType(choiceBoxConnectionType.getValue());
+					detector.setIPDetector(textFieldIPCamera.getText());
+					detector.setPort(textFieldPortCamera.getText());
+					detector.setPortXML(textFieldPortXML.getText());
+					detector.setPortHTTP(textFieldPortHTTP.getText());
+					detector.setResponse(textFieldResponse.getText());
+					detector.setSpi(textFieldSPIAddress.getText());
+					detector.setPeriodInterrogation(textFieldPeriodInterrogation.getText());
+					detector.setPeriodSaving(textFieldPeriodSaving.getText());
 					detector.setRootID(listViewDetectors.getSelectionModel().getSelectedItem().getLabelNumberOfDetector().getText());
 				}
 				if(detectorsList.size() > 1) {
+					previousIndex = listViewZones.getSelectionModel().getSelectedIndex();
 					Detector detector = detectorsList.get(previousIndex);
 					detector.setModelDetector(textFieldModelDetector.getText());
 					detector.setLocationDetector(textFieldLocationDetector.getText());
@@ -330,6 +357,8 @@ public class RoadDetectorPresenter {
 					detector.setPort(textFieldPortCamera.getText());
 					detector.setPortXML(textFieldPortXML.getText());
 					detector.setPortHTTP(textFieldPortHTTP.getText());
+					detector.setResponse(textFieldResponse.getText());
+					detector.setSpi(textFieldSPIAddress.getText());
 					detector.setPeriodInterrogation(textFieldPeriodInterrogation.getText());
 					detector.setPeriodSaving(textFieldPeriodSaving.getText());
 					detector.setRootID(listViewDetectors.getSelectionModel().getSelectedItem().getLabelNumberOfDetector().getText());
@@ -603,12 +632,25 @@ public class RoadDetectorPresenter {
 		if(previousDetectorsList != null) {
 			if(previousDetectorsList.size() == 1) {
 				Detector detector = previousDetectorsList.get(0);
-				detector.setModelDetector(textFieldModelDetector.getText());
+				/*detector.setModelDetector(textFieldModelDetector.getText());
 				detector.setLocationDetector(textFieldLocationDetector.getText());
 				detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
 				detector.setResponse(textFieldResponse.getText());
 				detector.setConnectionType(choiceBoxConnectionType.getValue());
+				detector.setSpi(textFieldSPIAddress.getText());*/
+				detector.setModelDetector(textFieldModelDetector.getText());
+				detector.setLocationDetector(textFieldLocationDetector.getText());
+				detector.setFaultTimeoutDetector(textFieldFaultTimeOut.getText());
+				detector.setConnectionType(choiceBoxConnectionType.getValue());
+				detector.setIPDetector(textFieldIPCamera.getText());
+				detector.setPort(textFieldPortCamera.getText());
+				detector.setPortXML(textFieldPortXML.getText());
+				detector.setPortHTTP(textFieldPortHTTP.getText());
+				detector.setResponse(textFieldResponse.getText());
 				detector.setSpi(textFieldSPIAddress.getText());
+				detector.setPeriodInterrogation(textFieldPeriodInterrogation.getText());
+				detector.setPeriodSaving(textFieldPeriodSaving.getText());
+				detector.setRootID(listViewDetectors.getSelectionModel().getSelectedItem().getLabelNumberOfDetector().getText());
 			}
 			if(previousDetectorsList.size() > 1) {
 				String index = listViewZones.getSelectionModel().getSelectedItem().getLabelZoneNumber().getText();
