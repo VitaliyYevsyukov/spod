@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.RoadPromtactuPresenter">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.RoadPromtactuPresenter">
    <children>
       <Label fx:id="labelPromtactu" layoutX="652.0" layoutY="10.0" text="Промтакты" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -31,7 +22,7 @@
       <Button fx:id="buttonCreateInterphaseTransitions" layoutX="215.0" layoutY="335.0" mnemonicParsing="false" onAction="#createInterphaseTransitions" prefWidth="100.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="215.0" />
       <Button fx:id="buttonDeleteInterphaseTransitions" layoutX="325.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteInterphase" prefWidth="100.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="325.0" />
       <Button fx:id="buttonGenerateInterphaseTransitions" layoutX="441.0" layoutY="355.0" mnemonicParsing="false" prefWidth="100.0" text="Генерировать" textFill="#1d3356" visible="false" AnchorPane.bottomAnchor="270.0" AnchorPane.rightAnchor="259.0" />
-      <Button fx:id="buttonIndustrialTable" disable="true" layoutX="316.0" layoutY="370.0" mnemonicParsing="false" onAction="#openPromtactTable" prefHeight="25.0" prefWidth="210.0" text="Таблица промтактов" textFill="#1d3356" visible="false" AnchorPane.bottomAnchor="255.0" AnchorPane.leftAnchor="316.0" />
+      <Button fx:id="buttonIndustrialTable" layoutX="215.0" layoutY="368.0" mnemonicParsing="false" onAction="#openPromtactTable" prefHeight="25.0" prefWidth="210.0" style="-fx-background-radius: 10;" text="Таблица промтактов" textFill="#1d3356" AnchorPane.bottomAnchor="257.0" AnchorPane.leftAnchor="215.0" />
       <Separator layoutX="25.0" layoutY="413.0" prefWidth="750.0" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
       <Label fx:id="labelPromtactForDirectionN" layoutX="220.0" layoutY="433.0" prefHeight="17.0" text="Промтакт для направления №" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="220.0" />
       <Label fx:id="labelPromtactForDirection" layoutX="440.0" layoutY="433.0" text="0" textAlignment="CENTER" textFill="#1d3356" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="440.0">

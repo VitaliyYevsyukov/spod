@@ -2016,13 +2016,14 @@ public class RoadPromtactuPresenter {
 		mapOfDirectionSpecificPromtact = iRoadModel.getModel().getRoadPromtactuModel().getMapOfInterphaseSpecificPromtact();
 		
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/componentTreeView/Specific_promtact_table.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Specific_promtact_table.fxml"));
 			Pane object = fxmlLoader.load();
 			
 			SpecificPromtactTablePresenter specificPromtactTablePresenter = fxmlLoader.getController();
-			
-			specificPromtactTablePresenter.mapOfDirection(mapOfDirectionSpecificPromtact);
+
 			specificPromtactTablePresenter.listRoadDirection(iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList());
+			specificPromtactTablePresenter.mapOfDirection(mapOfDirectionSpecificPromtact);
+			//specificPromtactTablePresenter.listRoadDirection(iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList());
 			specificPromtactTablePresenter.setItemsTableView();
 			
 			Scene scene = new Scene(object);

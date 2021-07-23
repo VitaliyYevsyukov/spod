@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="tableViewSpecificPromtactTable" prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.SpecificPromtactTablePresenter">
+<AnchorPane fx:id="anchorPaneSpecificPromtactTable" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.SpecificPromtactTablePresenter">
    <children>
-      <TableView fx:id="tableViewSpecificPromtactTable" layoutX="25.0" layoutY="15.0" prefHeight="270.0" prefWidth="550.0" stylesheets="@../css/tableview.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="15.0">
+      <TableView fx:id="tableViewSpecificPromtactTable" layoutX="25.0" layoutY="75.0" prefHeight="450.0" prefWidth="750.0" stylesheets="@../css/tableview.css" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
-          <TableColumn fx:id="tableColumnNumber" prefWidth="75.0" text="Номер" />
-          <TableColumn fx:id="tableColumnTypeDirection" prefWidth="75.0" text="Тип направления" />
+          <TableColumn fx:id="tableColumnNumber" minWidth="50.0" prefWidth="50.0" text="Номер" />
+            <TableColumn fx:id="tableColumnTypeDirection" minWidth="250.0" prefWidth="75.0" text="Тип" />
             <TableColumn fx:id="tableColumnEndGreenAddit" prefWidth="75.0" text="КЗД" />
             <TableColumn fx:id="tableColumnDurationGreenBlink" prefWidth="75.0" text="КЗМ" />
             <TableColumn fx:id="tableColumnDurationYellow" prefWidth="75.0" text="КЖ" />
@@ -28,5 +26,40 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <Label layoutX="25.0" layoutY="15.0" text="Спецефические промтакты для напрвлений в межфазном переходе" textFill="#1d3356" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="65.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventPreviousInterphase" text="&lt;" textFill="#1d3356" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="41.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="364.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventNextInterphase" text="&gt;" textFill="#1d3356" AnchorPane.leftAnchor="364.0" AnchorPane.topAnchor="41.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="110.0" layoutY="45.0" text="из фазы № " textFill="#1d3356" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbFromPhase" layoutX="195.0" layoutY="45.0" prefWidth="25.0" textFill="#048a14" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbToPhase" layoutX="315.0" layoutY="45.0" prefWidth="25.0" textFill="#048a14" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="240.0" layoutY="45.0" text="в фазу № " textFill="#1d3356" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
