@@ -31,12 +31,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="65.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventPreviousInterphase" text="&lt;" textFill="#1d3356" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="41.0">
+      <Button fx:id="btnPrevious" layoutX="65.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventPreviousInterphase" style="-fx-background-radius: 8;" text="&lt;" textFill="#1d3356" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="41.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="364.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventNextInterphase" text="&gt;" textFill="#1d3356" AnchorPane.leftAnchor="364.0" AnchorPane.topAnchor="41.0">
+      <Button fx:id="btnNext" layoutX="364.0" layoutY="41.0" mnemonicParsing="false" onAction="#eventNextInterphase" style="-fx-background-radius: 8;" text="&gt;" textFill="#1d3356" AnchorPane.leftAnchor="364.0" AnchorPane.topAnchor="41.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

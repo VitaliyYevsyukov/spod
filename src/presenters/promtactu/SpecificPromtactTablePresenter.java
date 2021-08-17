@@ -1,9 +1,6 @@
 package presenters.promtactu;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,11 +21,11 @@ public class SpecificPromtactTablePresenter {
     private TableColumn<SpecificPromtactTableData, String> tableColumnNumber, tableColumnTypeDirection, tableColumnEndGreenAddit, tableColumnDurationGreenBlink,
             tableColumnDurationYellow, tableColumnEndOfRed, tableColumnDurationRedYellow;
 	@FXML
-	private Button buttonOK;
+	private Button buttonOK, btnPrevious, btnNext;
 	@FXML
     private Label lbFromPhase, lbToPhase;
 
-	int index;
+	int index = 0;
 	int finalIndex;
 
 	RoadDirection roadDirection;
@@ -121,7 +118,7 @@ public class SpecificPromtactTablePresenter {
 
 		tableViewSpecificPromtactTable.getItems().clear();
 
-		int finalIndex = mapOfDirectionSpecificPromtact.size();
+		finalIndex = mapOfDirectionSpecificPromtact.size();
 
 		if(index != finalIndex){
 
@@ -185,6 +182,13 @@ public class SpecificPromtactTablePresenter {
 			index++;
 		}
 
+		if(index == finalIndex){
+			btnNext.setDisable(true);
+		}
+
+		if(index > 0){
+			btnPrevious.setDisable(false);
+		}
 
 
 	}
@@ -192,45 +196,73 @@ public class SpecificPromtactTablePresenter {
 	public void eventPreviousInterphase(){
 		System.out.println("Event previous interphase");
 
+		index--;
+
 		tableViewSpecificPromtactTable.getItems().clear();
 
-		if(index != 0){
+		List<InterphaseTransitionsHBoxCell> interPhaseList = new ArrayList<>();
+
+		if(index >= 1){
+
 			String currentFrom = lbFromPhase.getText();
 			String currentTo = lbToPhase.getText();
 
 			InterphaseTransitionsHBoxCell previousInterPhase = null;
 
 			for(Map.Entry<InterphaseTransitionsHBoxCell, Map<String, PromtactData>> entry : mapOfDirectionSpecificPromtact.entrySet()){
-				if(!entry.getKey().getComboBoxFromPhase().getValue().equals(currentFrom) & !entry.getKey().getComboBoxToPhase().getValue().equals(currentTo)){
-					previousInterPhase = entry.getKey();
-				}else{
-					lbFromPhase.setText(previousInterPhase.getComboBoxFromPhase().getValue());
-					lbToPhase.setText(previousInterPhase.getComboBoxToPhase().getValue());
-				}
-				/*InterphaseTransitionsHBoxCell currentInterPhase = entry.getKey();
-				previousInterPhase = currentInterPhase;
-				if(currentInterPhase.getComboBoxFromPhase().getValue().equals(currentFrom) & currentInterPhase.getComboBoxToPhase().getValue().equals(currentTo)){
-					lbFromPhase.setText(previousInterPhase.getComboBoxFromPhase().getValue());
-					lbToPhase.setText(previousInterPhase.getComboBoxToPhase().getValue());
-				}*/
+				InterphaseTransitionsHBoxCell interPhase = entry.getKey();
+				interPhaseList.add(interPhase);
 			}
+
+			InterphaseTransitionsHBoxCell interphaseTransitionsHBoxCell = interPhaseList.get(index - 1);
+
+			lbFromPhase.setText(interphaseTransitionsHBoxCell.getComboBoxFromPhase().getValue());
+			lbToPhase.setText(interphaseTransitionsHBoxCell.getComboBoxToPhase().getValue());
+
+			Map<String, PromtactData> promtactDataMap = mapOfDirectionSpecificPromtact.get(interphaseTransitionsHBoxCell);
+			for(RoadDirection roadDirection : roadDirectionList){
+				String directionNumber = roadDirection.getRoadDirections_number();
+				String typeDirection = roadDirection.getRoadDirections_typeOfDirection().getTypDirection();
+
+				for(Map.Entry<String, PromtactData> entry :  promtactDataMap.entrySet()){
+					String dirNumberKey = entry.getKey();
+					PromtactData promtactData = entry.getValue();
+
+					if(directionNumber.equals(dirNumberKey)){
+						specificPromtactTableData = new SpecificPromtactTableData();
+
+						specificPromtactTableData.setNumber(directionNumber);
+						specificPromtactTableData.setType(typeDirection);
+						specificPromtactTableData.setEndGreenAddit(promtactData.getRoadPromtactu_endGreenAddit());
+						specificPromtactTableData.setDurationGreenBlink(promtactData.getRoadPromtactu_durationGreenBlink());
+						specificPromtactTableData.setDurationYellow(promtactData.getRoadPromtactu_durationYellow());
+						specificPromtactTableData.setEndOfRed(promtactData.getRoadPromtactu_endRed());
+						specificPromtactTableData.setDurationRedYellow(promtactData.getRoadPromtactu_durationRedYellow());
+
+						promtactTableDataObservableList.add(specificPromtactTableData);
+
+						tableColumnNumber.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("number"));
+						tableColumnTypeDirection.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("type"));
+						tableColumnEndGreenAddit.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("endGreenAddit"));
+						tableColumnDurationGreenBlink.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("durationGreenBlink"));
+						tableColumnDurationYellow.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("durationYellow"));
+						tableColumnEndOfRed.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("endOfRed"));
+						tableColumnDurationRedYellow.setCellValueFactory(new PropertyValueFactory<SpecificPromtactTableData, String>("durationRedYellow"));
+					}
+				}
+			}
+			tableViewSpecificPromtactTable.setItems(promtactTableDataObservableList);
+
+
 		}
 
-		/*while(index != 0){
-			String currentFrom = lbFromPhase.getText();
-			String currentTo = lbToPhase.getText();
+		if(index != finalIndex){
+			btnNext.setDisable(false);
+		}
 
-			InterphaseTransitionsHBoxCell previousInterPhase = null;
-
-			for(Map.Entry<InterphaseTransitionsHBoxCell, Map<String, PromtactData>> entry : mapOfDirectionSpecificPromtact.entrySet()){
-				InterphaseTransitionsHBoxCell currentInterPhase = entry.getKey();
-				previousInterPhase = currentInterPhase;
-				if(currentInterPhase.getComboBoxFromPhase().getValue().equals(currentFrom) & currentInterPhase.getComboBoxToPhase().getValue().equals(currentTo)){
-					lbFromPhase.setText(previousInterPhase.getComboBoxFromPhase().getValue());
-					lbToPhase.setText(previousInterPhase.getComboBoxToPhase().getValue());
-				}
-			}
-		}*/
+		if(index == 1){
+			btnPrevious.setDisable(true);
+		}
 
 	}
 
@@ -248,19 +280,6 @@ public class SpecificPromtactTablePresenter {
 		tableColumnDurationRedYellow.setStyle("-fx-alignment:CENTER");
 
     }
-	    
-	    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
