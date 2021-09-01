@@ -324,7 +324,10 @@ public class RoadPhasePresenter {
 		valuesOfComboBox = FXCollections.observableArrayList();
 		for (RoadDirection roadDirection : iRoadModel.getModel().getRoadDirectionModel().getRoadDirectionList()) {
 			String dirNumber = roadDirection.getRoadDirections_number();
-			valuesOfComboBox.add(dirNumber);
+			if(!valuesOfComboBox.contains(dirNumber)){
+				valuesOfComboBox.add(dirNumber);
+			}
+
 		}
 		////////////////////////////		
 		
@@ -339,8 +342,10 @@ public class RoadPhasePresenter {
 		
 		if(openDirectionsList != null) {
 			for(OpenDirectionInCurrentPhaseHBoxCell numberDirection : openDirectionsList) {				
+				List<String> existedItems = numberDirection.getComboBox().getItems();
+				valuesOfComboBox.removeAll(existedItems);
 				//numberDirection.getComboBox().getItems().clear();
-				//numberDirection.setObservableListComboBox(valuesOfComboBox);
+				numberDirection.setObservableListComboBox(valuesOfComboBox);
 				openDirectionInCurrentPhaseHBoxCellList.add(numberDirection);				
 				openDirectionInCurrentPhaseHBoxCellObservableList = FXCollections.observableList(openDirectionInCurrentPhaseHBoxCellList);
 				listViewOpenDirectionInCurrentPhase.setItems(openDirectionInCurrentPhaseHBoxCellObservableList);
@@ -742,9 +747,12 @@ public class RoadPhasePresenter {
 			valuesOfComboBox.removeAll(existedOpenDirectionsList);			
 						
 			if(openDirectionsList != null) {
-				for(OpenDirectionInCurrentPhaseHBoxCell numberDirection : openDirectionsList) {								
+				for(OpenDirectionInCurrentPhaseHBoxCell numberDirection : openDirectionsList) {
+					List<String> existedItems = numberDirection.getComboBox().getItems();
+					valuesOfComboBox.removeAll(existedItems);
+
 					//numberDirection.getComboBox().getItems().clear();
-					//numberDirection.setObservableListComboBox(valuesOfComboBox);
+					numberDirection.setObservableListComboBox(valuesOfComboBox);
 					openDirectionInCurrentPhaseHBoxCellList.add(numberDirection);				
 					openDirectionInCurrentPhaseHBoxCellObservableList = FXCollections.observableList(openDirectionInCurrentPhaseHBoxCellList);
 					listViewOpenDirectionInCurrentPhase.setItems(openDirectionInCurrentPhaseHBoxCellObservableList);
@@ -796,9 +804,10 @@ public class RoadPhasePresenter {
 			
 			if(openDirectionsList != null) {
 				for(OpenDirectionInCurrentPhaseHBoxCell numberDirection : openDirectionsList) {
-					
+					List<String> existedItems = numberDirection.getComboBox().getItems();
+					valuesOfComboBox.removeAll(existedItems);
 					//numberDirection.getComboBox().getItems().clear();
-					//numberDirection.setObservableListComboBox(valuesOfComboBox);
+					numberDirection.setObservableListComboBox(valuesOfComboBox);
 					openDirectionInCurrentPhaseHBoxCellList.add(numberDirection);				
 					openDirectionInCurrentPhaseHBoxCellObservableList = FXCollections.observableList(openDirectionInCurrentPhaseHBoxCellList);
 					listViewOpenDirectionInCurrentPhase.setItems(openDirectionInCurrentPhaseHBoxCellObservableList);

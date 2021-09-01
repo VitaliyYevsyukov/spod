@@ -251,8 +251,8 @@ public class SpecificPromtactTablePresenter {
 					}
 				}
 			}
-			tableViewSpecificPromtactTable.setItems(promtactTableDataObservableList);
 
+			tableViewSpecificPromtactTable.setItems(promtactTableDataObservableList);
 
 		}
 
@@ -280,8 +280,6 @@ public class SpecificPromtactTablePresenter {
 		tableColumnDurationRedYellow.setStyle("-fx-alignment:CENTER");
 
     }
-	
-	
 	
 	
 	

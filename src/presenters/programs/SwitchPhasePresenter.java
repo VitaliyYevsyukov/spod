@@ -57,7 +57,7 @@ public class SwitchPhasePresenter {
 	}
 	
 	public void createSwichPhase() {
-		System.out.println("Press 'Create swich phase'");
+		System.out.println("Press 'Create switch phase'");
 		
 		mapOfSwichPhase = iRoadModel.getModel().getRoadProgramsModel().getMapOfSwichPhase();
 		

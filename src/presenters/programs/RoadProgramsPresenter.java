@@ -928,8 +928,8 @@ public class RoadProgramsPresenter {
 		
 		RoadProgram selectedRoadProgram = tableViewAllProgram.getSelectionModel().getSelectedItem();
 		
-		if(!selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Замена фаз") || !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Желтое мигание") || 
-				!selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Отключение светофора")) {
+		if(!selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Замена фаз") || !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Желтое мигание")
+				|| !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Отключение светофора")) {
 		
 			List<PhaseInProgram> phaseInProgramsList = mapOfPhasesInProgram.get(selectedRoadProgram);
 			if(phaseInProgramsList.size() != 0) {
