@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="370.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.programs.SpeedSignPresenter">
+<AnchorPane prefHeight="370.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.programs.SpeedSignPresenter">
    <children>
       <Label layoutX="562.0" layoutY="10.0" text="Рекомендуемая скорость" textFill="#1d3356" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
          <font>

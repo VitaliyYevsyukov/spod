@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="320.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.programs.SwitchPhasePresenter">
+<AnchorPane prefHeight="320.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.programs.SwitchPhasePresenter">
    <children>
-      <TableView fx:id="tableViewSwichPhase" editable="true" layoutX="25.0" layoutY="55.0" prefHeight="200.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+      <TableView fx:id="tableViewSwichPhase" editable="true" layoutX="25.0" layoutY="55.0" prefHeight="200.0" prefWidth="750.0" stylesheets="@../css/tableview.css" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>
           <TableColumn fx:id="tableColumnPhase" prefWidth="75.0" text="Фаза базовая" />
           <TableColumn fx:id="tableColumnTmain" prefWidth="75.0" text="Т основное" />
@@ -28,12 +26,12 @@
          </font>
       </Text>
       <Separator layoutX="25.0" layoutY="37.0" prefWidth="750.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-      <Button fx:id="btnCreateSwichPhase" layoutX="565.0" layoutY="270.0" mnemonicParsing="false" onAction="#createSwichPhase" prefWidth="100.0" text="Создать" textFill="#1d3356" AnchorPane.rightAnchor="135.0">
+      <Button fx:id="btnCreateSwichPhase" layoutX="565.0" layoutY="270.0" mnemonicParsing="false" onAction="#createSwichPhase" prefWidth="100.0" style="-fx-background-radius: 10;" text="Создать" textFill="#1d3356" AnchorPane.rightAnchor="135.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeleteSwichPhase" layoutX="675.0" layoutY="270.0" mnemonicParsing="false" onAction="#deleteSwichPhase" prefWidth="100.0" text="Удалить" textFill="#1d3356" AnchorPane.rightAnchor="25.0">
+      <Button fx:id="btnDeleteSwichPhase" layoutX="675.0" layoutY="270.0" mnemonicParsing="false" onAction="#deleteSwichPhase" prefWidth="100.0" style="-fx-background-radius: 10;" text="Удалить" textFill="#1d3356" AnchorPane.rightAnchor="25.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

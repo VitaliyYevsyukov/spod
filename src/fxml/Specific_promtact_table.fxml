@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPaneSpecificPromtactTable" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.promtactu.SpecificPromtactTablePresenter">
+<AnchorPane fx:id="anchorPaneSpecificPromtactTable" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.promtactu.SpecificPromtactTablePresenter">
    <children>
       <TableView fx:id="tableViewSpecificPromtactTable" layoutX="25.0" layoutY="75.0" prefHeight="450.0" prefWidth="750.0" stylesheets="@../css/tableview.css" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
         <columns>

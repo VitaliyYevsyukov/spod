@@ -21,6 +21,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -2701,7 +2703,7 @@ public class RoadObjectPresenter {
 
 		ObservableList<String> observableList = FXCollections.observableArrayList("Красно-желтый", "Желтый");
 		chCharge.setItems(observableList);
-				
+
 		// listeners to fields for update
 		txtName.textProperty().addListener((observable, oldValue, newValue) -> {
 			iRoadObjectModel.getModel().getRoadObjectModel().setRoadObjectName(newValue);

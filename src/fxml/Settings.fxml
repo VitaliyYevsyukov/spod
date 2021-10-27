@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="541.0" prefWidth="650.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.object.ConnectSettingsPresenter">
+<AnchorPane prefHeight="541.0" prefWidth="650.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.object.ConnectSettingsPresenter">
    <children>
       <Label layoutX="321.0" layoutY="94.0" text="IP адрес" textFill="#1d3356" visible="false" />
       <Label layoutX="25.0" layoutY="368.0" text="КДК порт" textFill="#1d3356">

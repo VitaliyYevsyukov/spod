@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.object.ListViewAllObjectPresenter">
+<AnchorPane prefHeight="400.0" prefWidth="750.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.object.ListViewAllObjectPresenter">
    <children>
       <Label layoutX="332.0" layoutY="10.0" text="Список объектов" textFill="#1d3356" AnchorPane.rightAnchor="25.0">
          <font>

@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.directions.DirectionBasePromtactPresenter">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.directions.DirectionBasePromtactPresenter">
    <children>
       <Label layoutX="209.0" layoutY="15.0" text="Базовый (стандартный) промтакт" textFill="#1d3356" />
       <Label layoutX="245.0" layoutY="35.0" text="для направления №" textFill="#1d3356" />

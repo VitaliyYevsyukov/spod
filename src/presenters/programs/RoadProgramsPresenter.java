@@ -928,7 +928,8 @@ public class RoadProgramsPresenter {
 		
 		RoadProgram selectedRoadProgram = tableViewAllProgram.getSelectionModel().getSelectedItem();
 		
-		if(!selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Замена фаз") || !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Желтое мигание")
+		if(!selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Замена фаз")
+				|| !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Желтое мигание")
 				|| !selectedRoadProgram.getRoadProgram_programMode().getMode().equals("Отключение светофора")) {
 		
 			List<PhaseInProgram> phaseInProgramsList = mapOfPhasesInProgram.get(selectedRoadProgram);
@@ -1065,7 +1066,7 @@ public class RoadProgramsPresenter {
 	}
 
 	public void clickPreviousProgram() {
-		System.out.println("----- Klick button 'Previous' -----");
+		System.out.println("----- Click button 'Previous' -----");
 		
 		if(!tableViewAllProgram.getItems().isEmpty()) {
 			mapOfPhasesInProgram = iRoadModel.getModel().getRoadProgramsModel().getMapOfPhasesInProgram();

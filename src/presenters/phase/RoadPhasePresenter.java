@@ -146,6 +146,7 @@ public class RoadPhasePresenter {
 		localeAlert = new Locale(lang);
 		bundleAlert = ResourceBundle.getBundle("localeAlert_lang", localeAlert);
 	}*/
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void show(IRoadModel iRoadModel) {

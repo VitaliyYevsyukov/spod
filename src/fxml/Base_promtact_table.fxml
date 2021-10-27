@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="355.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.directions.BasePromtactTablePresenter">
+<AnchorPane prefHeight="355.0" prefWidth="800.0" style="-fx-background-color: #e8eef7;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.directions.BasePromtactTablePresenter">
    <children>
       <Button fx:id="buttonOK" layoutX="500.0" layoutY="315.0" mnemonicParsing="false" onAction="#buttonOKEvent" prefWidth="75.0" style="-fx-background-radius: 10;" text="OK" textFill="#1d3356" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="25.0" />
       <Separator layoutX="25.0" layoutY="300.0" prefWidth="550.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />

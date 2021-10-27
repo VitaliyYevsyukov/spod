@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<MenuBar stylesheets="/css/menubar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presenters.menuBar.MenuBarController">
+<MenuBar stylesheets="/css/menubar.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="presenters.menuBar.MenuBarController">
    <menus>
       <Menu fx:id="menuObject" mnemonicParsing="false" text="Объекты">
          <items>
