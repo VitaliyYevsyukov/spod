@@ -77,7 +77,7 @@ public class ScheduleCalendarOffsetTimeEditingCell extends TableCell<SchedulePro
 				commitEdit(textField.getText());
 				
 				String str = textField.getText();
-				if(!str.matches("^[1-5][0-9]?$")) {
+				if(!str.matches("^[1-5]?[0-9]$")) {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Ошибка");
 					alert.setHeaderText("Укажите значение в формате от 0 до 59");
