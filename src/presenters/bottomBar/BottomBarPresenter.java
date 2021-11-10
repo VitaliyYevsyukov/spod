@@ -1098,7 +1098,7 @@ public class BottomBarPresenter {
 			}
 
 			Map<String, PromtactData> mapOfBasePromtactMap = roadDirectionsModel.getMapOfBasePromtact();
-			org.jdom.Element dasePromtactElement = new org.jdom.Element("dase_promtact");
+			org.jdom.Element dasePromtactElement = new org.jdom.Element("base_promtact");
 			for (Map.Entry<String, PromtactData> entry : mapOfBasePromtactMap.entrySet()) {
 				directionElement = new org.jdom.Element("direction");
 
