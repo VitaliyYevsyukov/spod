@@ -177,7 +177,7 @@ public class RoadProgramsPresenter {
 
 		mapOfDateCalendar = iRoadModel.getModel().getRoadProgramsModel().getMapOfDateCalendar();
 		if (!mapOfDateCalendar.isEmpty()) {
-			buttonCreateScheduleProgramByDate.setDisable(false);
+			//buttonCreateScheduleProgramByDate.setDisable(false);
 			for (Map.Entry<ScheduleCalendarDateHBoxCell, List<ScheduleProgram>> entry : mapOfDateCalendar.entrySet()) {
 				ScheduleCalendarDateHBoxCell scheduleCalendarDateHBoxCell = entry.getKey();
 				

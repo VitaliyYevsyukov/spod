@@ -733,13 +733,32 @@ public class SourceKDAR {
 					int dir_type = returnTypeDirection(roadDirection.getRoadDirections_typeOfDirection().getTypDirection());
 					b2 = convert(dir_type);
 
-					int control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
-					int control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
-					if(channel4editRed_value == control1 || channel4editRed_value == control2) {	// if is control
+					//int control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
+					//int control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
+
+					/*if(channel4editRed_value == control1 || channel4editRed_value == control2) {	// if is control
+
+						b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+						b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
+					}*/
+
+					int control1 = 0;
+					int control2 = 0;
+
+					if(!roadDirection.getRoadDirections_control_1().equals("")) {
+						control1 = Integer.parseInt(roadDirection.getRoadDirections_control_1());
+					}
+					if(!roadDirection.getRoadDirections_control_2().equals("")) {
+						control2 = Integer.parseInt(roadDirection.getRoadDirections_control_2());
+					}
+
+					if(channel1red_value == control1 || channel1red_value == control2) {	// if is control
 
 						b3 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
 						b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
 					}
+
+
 
 					stitch[128 + (channel4editRed_value - 1)*4] = b1;
 					stitch[128 + (channel4editRed_value - 1)*4 + 1] = b2;
