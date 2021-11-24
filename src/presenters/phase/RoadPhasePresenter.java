@@ -168,7 +168,7 @@ public class RoadPhasePresenter {
 		//////////////////////////////////////////////
 		//////// SORT OPEN DIRECTION IN PHASE ////////
 		//////////////////////////////////////////////		
-		mapOfOpenDirectionInPhase = new LinkedHashMap<>();
+		/*mapOfOpenDirectionInPhase = new LinkedHashMap<>();
 		Map<String, List<Integer>> sortMap = new LinkedHashMap<>();
 		for(Map.Entry<String, List<OpenDirectionInCurrentPhaseHBoxCell>> entry : unsortedMapOfOpenDirectionInPhase.entrySet()) {
 			List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsInPhase = entry.getValue();
@@ -197,7 +197,7 @@ public class RoadPhasePresenter {
 		}
 		///////////////////////////////////////////////////////
 		
-		iRoadModel.getModel().getRoadPhaseModel().setMapOpenDirectionInPhase(mapOfOpenDirectionInPhase);
+		iRoadModel.getModel().getRoadPhaseModel().setMapOpenDirectionInPhase(mapOfOpenDirectionInPhase);*/
 			
 		mapOfOpenDirectionInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
 		
@@ -212,8 +212,37 @@ public class RoadPhasePresenter {
 			////////////////////////////
 			
 			listViewOpenDirectionInCurrentPhase.getItems().clear();
-			
+
+
 			List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsList = mapOfOpenDirectionInPhase.get(tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number());
+
+			for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsList) {
+				String openDir = openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue();
+				existedOpenDirectionsList.add(openDir);
+			}
+
+			valuesOfComboBox.removeAll(existedOpenDirectionsList);
+
+			if(openDirectionsList != null) {
+				for(OpenDirectionInCurrentPhaseHBoxCell numberDirection : openDirectionsList) {
+					List<String> existedItems = numberDirection.getComboBox().getItems();
+					valuesOfComboBox.removeAll(existedItems);
+					//numberDirection.getComboBox().getItems().clear();
+					numberDirection.setObservableListComboBox(valuesOfComboBox);
+					openDirectionInCurrentPhaseHBoxCellList.add(numberDirection);
+					openDirectionInCurrentPhaseHBoxCellObservableList = FXCollections.observableList(openDirectionInCurrentPhaseHBoxCellList);
+					listViewOpenDirectionInCurrentPhase.setItems(openDirectionInCurrentPhaseHBoxCellObservableList);
+					listViewOpenDirectionInCurrentPhase.getSelectionModel().selectFirst();
+				}
+				labelDirInPhaseValue.setText(tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number());
+			}else {
+				listViewOpenDirectionInCurrentPhase.getItems().clear();
+			}
+
+
+
+			
+			/*List<OpenDirectionInCurrentPhaseHBoxCell> openDirectionsList = mapOfOpenDirectionInPhase.get(tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number());
 			
 			for(OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : openDirectionsList) {
 				String openDir = openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue();
@@ -231,9 +260,9 @@ public class RoadPhasePresenter {
 				openDirectionInCurrentPhaseHBoxCellObservableList = FXCollections.observableList(openDirectionInCurrentPhaseHBoxCellList);
 				listViewOpenDirectionInCurrentPhase.setItems(openDirectionInCurrentPhaseHBoxCellObservableList);
 				listViewOpenDirectionInCurrentPhase.getSelectionModel().selectFirst();
-			}
+			}*/
 			
-			labelDirInPhaseValue.setText(tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number());
+			//labelDirInPhaseValue.setText(tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number());
 			
 			if(valuesOfComboBox.size() != 0) {
 				btnCreateDirectionInPhase.setDisable(false);
@@ -606,7 +635,17 @@ public class RoadPhasePresenter {
 			//add unused directions in ComboBox
 			for (OpenDirectionInCurrentPhaseHBoxCell openDirectionInCurrentPhaseHBoxCell : listViewOpenDirectionInCurrentPhase.getItems()) {
 				String existedDir = openDirectionInCurrentPhaseHBoxCell.getComboBox().getValue();
-				existedDirection.removeIf(direction -> direction.equals(existedDir));
+
+				if(existedDir != null){
+					if(existedDirection.contains(existedDir)){
+						existedDirection.add(existedDir);
+					}
+				}
+
+				/*if(existedDir != null){
+					existedDirection.removeIf(direction -> direction.equals(existedDir));
+				}*/
+
 			}
 			
 			String numberPhase = tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number();
@@ -696,10 +735,16 @@ public class RoadPhasePresenter {
 
 		String phaseKey = tableViewPhase.getSelectionModel().getSelectedItem().getRoadPhase_number();
 		int dirToDelete = listViewOpenDirectionInCurrentPhase.getSelectionModel().getSelectedIndex();
+		String deletedDirection = listViewOpenDirectionInCurrentPhase.getSelectionModel().getSelectedItem().getComboBox().getValue();
 
 		if (dirToDelete >= 0) {
 			listViewOpenDirectionInCurrentPhase.getItems().remove(dirToDelete);
 			mapOfOpenDirectionInPhase.get(phaseKey).remove(dirToDelete);
+			if(deletedDirection != null){
+				valuesOfComboBox.add(deletedDirection);
+			}
+
+			System.out.println();
 		}
 		//System.out.println("Map after delete direction\n" + mapOfOpenDirectionInPhase);
 	}

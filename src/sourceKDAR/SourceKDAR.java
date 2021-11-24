@@ -758,16 +758,12 @@ public class SourceKDAR {
 						b4 = convert(DEFINE_VALUE_RED_CHANEL_CONTROL);	// define
 					}
 
-
-
 					stitch[128 + (channel4editRed_value - 1)*4] = b1;
 					stitch[128 + (channel4editRed_value - 1)*4 + 1] = b2;
 					stitch[128 + (channel4editRed_value - 1)*4 + 2] = b3;
 					stitch[128 + (channel4editRed_value - 1)*4 + 3] = b4;
 
 				}
-
-
 
 		}
 		
