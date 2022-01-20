@@ -486,7 +486,7 @@ public class RoadPhasePresenter {
 			String phaseNumber = Integer.toString(Collections.max(allNumbersOfPhaseList) + 1);		//number for large phase number + 1
 			for (TypeKDK existedKDKType : typeKDKsList) {
 				if (existedKDKType.getName_KDK().equals(typeKDK)) {
-					int max_value = Integer.parseInt(existedKDKType.getPhases()) - 1;
+					int max_value = Integer.parseInt(existedKDKType.getPhases());
 					
 						if (Integer.parseInt(phaseNumber) <= max_value) {
 						

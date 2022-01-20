@@ -43,6 +43,13 @@ public class ConnectSettingsPresenter {
 		txtDelay.setText("1000");
         txtDelayDarkYF.setText("3000");
         txtSleepTime.setText("10000");
+		comboBoxKDKPort.setValue("ttyS3");
+		comboBoxLEDPort.setValue("ttyS1");
+		comboBoxKDPSpeed.setValue("115200");
+		comboBoxLEDSpeed.setValue("115200");
+		comboBoxConnectType.setValue("Ethernet");
+		txtConnectPort.setText("4002");
+		comboBoxConnectSpeed.setValue("115200");
 		
 		/*txtDelay.setText(iRoadObjectModel.getModel().getRoadObjectModel().getDelay());
 		txtDelayDarkYF.setText(iRoadObjectModel.getModel().getRoadObjectModel().getDelayYF());
@@ -56,17 +63,12 @@ public class ConnectSettingsPresenter {
         		iRoadObjectModel.getModel().getRoadObjectModel().setRoadObjectConnectType(comboBoxConnectType.getValue());
         	}
         }
-		//comboBoxConnectType.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectConnectType());
-		
-		
-		//comboBoxConnectSpeed.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectConnectSpeed());
-		
-		
-		
+		/*comboBoxConnectType.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectConnectType());	// If not default - uncomment
+		comboBoxConnectSpeed.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectConnectSpeed());
 		comboBoxKDKPort.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectKDPPort());
 		comboBoxKDPSpeed.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectKDPSpeed());
 		comboBoxLEDPort.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectLEDPort());
-		comboBoxLEDSpeed.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectLEDSpeed());
+		comboBoxLEDSpeed.setValue(iRoadObjectModel.getModel().getRoadObjectModel().getRoadObjectLEDSpeed());*/
 
 	}
 
