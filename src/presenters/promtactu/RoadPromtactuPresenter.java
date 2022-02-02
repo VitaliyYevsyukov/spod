@@ -1740,7 +1740,35 @@ public class RoadPromtactuPresenter {
 		mapOfDirectionSpecificPromtact = iRoadModel.getModel().getRoadPromtactuModel().getMapOfInterphaseSpecificPromtact();
 		specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
 		mapOfOpenDirInPhase = iRoadModel.getModel().getRoadPhaseModel().getMapOpenDirectionInPhase();
-		
+
+		/*if(checkBoxFullPromtact.isSelected()){
+			PhaseDirectionsHBoxCell selectedDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();
+			if(selectedDirection != null){
+				clearTextFields();
+
+				textField_EndGreenAddit.setDisable(false);
+				textField_EndGreenBlink.setDisable(false);
+				textField_EndRed.setDisable(false);
+				textField_EndRedYellow.setDisable(false);
+				textField_EndYellow.setDisable(false);
+
+			}
+
+		}else{
+			PhaseDirectionsHBoxCell selectedDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();
+			if(selectedDirection != null){
+				clearTextFields();
+
+				if(selectedDirection.getComboBoxDirNumber().getValue() != null){
+
+				}else{
+
+				}
+
+			}
+		}*/
+
+
 		if(!checkBoxFullPromtact.isSelected()) {
 			
 			PhaseDirectionsHBoxCell selectedDirection = listViewPhaseDirections.getSelectionModel().getSelectedItem();
@@ -1773,12 +1801,18 @@ public class RoadPromtactuPresenter {
 				if(number != null) {
 					specificPromtactDataMap = mapOfDirectionSpecificPromtact.get(listViewInterphase.getSelectionModel().getSelectedItem());
 					
-					specificPromtactDataMap.remove(number);
+					//specificPromtactDataMap.remove(number);
 				}
-				
-				selectedDirection.getComboBoxNotChangeStateDirection().setDisable(false);
-				selectedDirection.getComboBoxDirNumber().setDisable(true);
-				selectedDirection.getComboBoxDirNumber().setValue(null);
+
+				textField_EndGreenAddit.setDisable(false);
+				textField_EndGreenBlink.setDisable(false);
+				textField_EndRed.setDisable(false);
+				textField_EndRedYellow.setDisable(false);
+				textField_EndYellow.setDisable(false);
+
+				//selectedDirection.getComboBoxNotChangeStateDirection().setDisable(false);
+				//selectedDirection.getComboBoxDirNumber().setDisable(true);
+				//selectedDirection.getComboBoxDirNumber().setValue(null);
 				
 				clearTextFields();
 				
